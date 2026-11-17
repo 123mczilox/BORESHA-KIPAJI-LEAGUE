@@ -1,0 +1,23 @@
+ apps/accounts/permissions.py | 419 [32m++++++++++++++++++[m[31m------[m
+ apps/fantasy/admin.py        | 398 [32m++++++++++++++++++++++[m[31m-[m
+ apps/fantasy/models.py       | 436 [32m++++++++++++++++++++++++[m[31m-[m
+ apps/matches/admin.py        | 328 [32m++++++++++++++++++[m[31m-[m
+ apps/matches/models.py       |   8 [32m+[m[31m-[m
+ apps/news/admin.py           |  41 [32m++[m[31m-[m
+ apps/news/models.py          |  85 [32m++++[m[31m-[m
+ apps/opportunities/admin.py  |  50 [32m++[m[31m-[m
+ apps/opportunities/models.py |  85 [32m++++[m[31m-[m
+ apps/players/admin.py        | 231 [32m++++++++++++[m[31m-[m
+ apps/players/models.py       | 122 [32m+++++[m[31m--[m
+ apps/players/tests.py        | 751 [32m++++++++++++++++++++++++++++++++++++++++++[m[31m-[m
+ apps/players/views.py        | 262 [32m++++++++++++++[m[31m-[m
+ apps/sponsors/admin.py       |  40 [32m++[m[31m-[m
+ apps/sponsors/models.py      |  76 [32m++++[m[31m-[m
+ apps/standings/admin.py      |  74 [32m++++[m[31m-[m
+ apps/standings/models.py     |  44 [32m+++[m
+ apps/teams/admin.py          |  89 [32m++++[m[31m-[m
+ config/settings.py           |   2 [32m+[m[31m-[m
+ config/urls.py               |   1 [32m+[m
+ exit()                       | 314 [31m------------------[m
+ requirements.txt             |   1 [32m+[m
+ 22 files changed, 3402 insertions(+), 455 deletions(-)

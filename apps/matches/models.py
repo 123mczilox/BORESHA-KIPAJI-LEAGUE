@@ -1,6 +1,8 @@
+from django.conf import settings
 from django.db import models
 from django.db.models import Q, F
 from apps.teams.models import Team
+
 
 
 class Season(models.Model):
@@ -139,7 +141,7 @@ class MatchOfficial(models.Model):
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.PROTECT,
+        on_delete=models.PROTECT,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
         related_name='officiated_matches'
     )
 
@@ -182,13 +184,13 @@ class MatchEvent(models.Model):
     )
 
     player = models.ForeignKey(
-        'Players.Player',
+        'players.Player',
         on_delete=models.PROTECT,
         related_name='match_events'
     )
 
     related_player = models.ForeignKey(
-        'Players.Player',
+        'players.Player',
         on_delete=models.PROTECT,
         null=True,
         blank=True,
