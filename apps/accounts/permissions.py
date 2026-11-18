@@ -12,6 +12,7 @@ USER_GROUPS = {
         'players.Player': ('view', 'add', 'change', 'delete'),
         'players.PlayerRegistration': ('view', 'add', 'change', 'delete'),
         'matches.Season': ('view', 'add', 'change', 'delete'),
+        'matches.SeasonTeam': ('view', 'add', 'change', 'delete'),
         'matches.Match': ('view', 'add', 'change', 'delete'),
         'matches.MatchOfficial': ('view', 'add', 'change', 'delete'),
         'matches.MatchEvent': ('view', 'add', 'change', 'delete'),

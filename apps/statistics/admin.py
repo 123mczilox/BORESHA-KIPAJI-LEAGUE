@@ -12,6 +12,7 @@ from apps.accounts.permissions import (
 
 from apps.matches.models import Match
 from .models import PlayerMatchPerformance, PlayerSeasonStatistics
+from .services import record_match_performance
 
 
 @admin.register(PlayerMatchPerformance)
@@ -20,6 +21,7 @@ class PlayerMatchPerformanceAdmin(admin.ModelAdmin):
     list_display = (
         'player',
         'match',
+        'appeared',
         'minutes_played',
         'goals_scored',
         'assists',
@@ -32,6 +34,7 @@ class PlayerMatchPerformanceAdmin(admin.ModelAdmin):
 
     list_filter = (
         'match__season',
+        'appeared',
         'clean_sheet',
         'player_of_the_match',
     )
@@ -52,6 +55,14 @@ class PlayerMatchPerformanceAdmin(admin.ModelAdmin):
     ordering = (
         '-goals_scored',
         '-assists',
+    )
+
+    readonly_fields = (
+        'goals_scored',
+        'yellow_cards',
+        'red_cards',
+        'own_goals',
+        'updated_at',
     )
 
     def get_queryset(self, request):
@@ -111,18 +122,49 @@ class PlayerMatchPerformanceAdmin(admin.ModelAdmin):
                 or is_match_official(request.user)
             )
 
+        if (
+            obj.match.status == Match.Status.COMPLETED
+            and not is_league_admin(request.user)
+        ):
+            return False
         return can_manage_match(request.user, obj.match)
 
     def has_delete_permission(self, request, obj=None):
-        return (
-            super().has_delete_permission(request)
-            and is_league_admin(request.user)
+        return False
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj is None:
+            return self.readonly_fields
+        return self.readonly_fields + ('match', 'player')
+
+    def save_model(self, request, obj, form, change):
+        editable_fields = (
+            'appeared',
+            'minutes_played',
+            'assists',
+            'clean_sheet',
+            'penalties_saved',
+            'player_of_the_match',
         )
+        performance = record_match_performance(
+            user=request.user,
+            match_id=obj.match_id,
+            player_id=obj.player_id,
+            values={
+                field: getattr(obj, field)
+                for field in editable_fields
+                if field in form.changed_data or not change
+            },
+        )
+        obj.pk = performance.pk
+        obj._state.adding = False
+        obj._state.db = performance._state.db
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'match' and is_match_official(request.user):
             kwargs['queryset'] = Match.objects.filter(
-                officials__user=request.user
+                officials__user=request.user,
+                status=Match.Status.LIVE,
             )
         elif db_field.name == 'player':
             kwargs['queryset'] = visible_players_for_user(request.user)

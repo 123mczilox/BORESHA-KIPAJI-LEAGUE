@@ -347,7 +347,8 @@ class MatchOfficialAuthorizationTests(AuthorizationTestCase):
             request,
             self.assigned_match,
         )
-        self.assertIn('home_score', change_form.base_fields)
+        self.assertIn('status', change_form.base_fields)
+        self.assertNotIn('home_score', change_form.base_fields)
         self.assertNotIn('home_team', change_form.base_fields)
 
     def test_match_access_decorator_allows_assigned_match_only(self):

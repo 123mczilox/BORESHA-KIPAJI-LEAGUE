@@ -26,7 +26,7 @@ class TeamStandings(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     
     class Meta:
-        ordering = ['-points', '-goal_difference', '-goals_for']
+        ordering = ['-points']
         constraints = [
             models.UniqueConstraint(
                 fields=['session', 'team'],

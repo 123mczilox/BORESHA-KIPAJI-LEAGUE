@@ -30,6 +30,9 @@ urlpatterns = [
     path('accounts/', include('apps.accounts.urls')),
     path('teams/', include('apps.teams.urls')),
     path('players/', include('apps.players.urls')),
+    path('matches/', include('apps.matches.urls')),
+    path('statistics/', include('apps.statistics.urls')),
+    path('standings/', include('apps.standings.urls')),
 ]
 
 if settings.DEBUG:

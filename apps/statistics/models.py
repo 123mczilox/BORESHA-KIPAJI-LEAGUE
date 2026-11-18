@@ -20,6 +20,8 @@ class PlayerMatchPerformance(models.Model):
         related_name='match_performances'
     )
 
+    appeared = models.BooleanField(default=False)
+
     minutes_played = models.PositiveIntegerField(default=0)
 
     goals_scored = models.PositiveIntegerField(default=0)
@@ -60,25 +62,25 @@ class PlayerMatchPerformance(models.Model):
             self.match.kickoff_time
         ).date()
 
-        eligible_teams = [
+        participating_team_ids = [
             self.match.home_team_id,
             self.match.away_team_id
         ]
 
-        registration_exists = self.player.registrations.filter(
+        eligible_registrations = self.player.registrations.filter(
             season=self.match.season,
-            team_id__in=eligible_teams,
+            team_id__in=participating_team_ids,
             start_date__lte=match_date
         ).filter(
             models.Q(end_date__isnull=True)
             | models.Q(end_date__gte=match_date)
-        ).exists()
+        ).values_list('team_id', flat=True).distinct()
 
-        if not registration_exists:
+        if len(eligible_registrations) != 1:
             raise ValidationError({
                 'player': (
-                    'This player was not registered to either '
-                    'team for this match on the match date.'
+                    'This player must be registered to exactly one '
+                    'participating team for this match on the match date.'
                 )
             })
 

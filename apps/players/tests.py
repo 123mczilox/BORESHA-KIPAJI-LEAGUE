@@ -550,6 +550,7 @@ class PlayerWorkflowTests(TestCase):
         performance = PlayerMatchPerformance(
             match=match,
             player=self.player,
+            appeared=True,
             minutes_played=90,
             goals_scored=1,
         )

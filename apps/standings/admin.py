@@ -40,7 +40,6 @@ class TeamStandingsAdmin(admin.ModelAdmin):
     ordering = (
         'session',
         '-points',
-        '-goals_for',
     )
 
     readonly_fields = (
@@ -52,6 +51,7 @@ class TeamStandingsAdmin(admin.ModelAdmin):
         'lost',
         'goals_for',
         'goals_against',
+        'goal_difference',
         'points',
         'updated_at',
     )
@@ -66,10 +66,7 @@ class TeamStandingsAdmin(admin.ModelAdmin):
         )
 
     def has_change_permission(self, request, obj=None):
-        return (
-            super().has_change_permission(request)
-            and is_league_admin(request.user)
-        )
+        return False
 
     def has_delete_permission(self, request, obj=None):
         return False
