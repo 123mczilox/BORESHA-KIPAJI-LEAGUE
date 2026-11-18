@@ -18,13 +18,13 @@ class TeamStandings(models.Model):
     won = models.PositiveIntegerField(default=0)
     drawn = models.PositiveIntegerField(default=0)
     lost = models.PositiveIntegerField(default=0)
-    
+
     goals_for = models.PositiveIntegerField(default=0)
     goals_against = models.PositiveIntegerField(default=0)
     goal_difference = models.IntegerField(default=0)
     points = models.PositiveIntegerField(default=0)
     updated_at = models.DateTimeField(auto_now=True)
-    
+
     class Meta:
         ordering = ['-points']
         constraints = [
@@ -44,4 +44,4 @@ class TeamStandings(models.Model):
 
     def __str__(self):
         return f"{self.team.name}-{self.session}"
-        
+
