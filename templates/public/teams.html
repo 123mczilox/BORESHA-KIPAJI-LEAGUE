@@ -1,0 +1,123 @@
+{% extends 'base/public_base.html' %}
+{% load static %}
+
+{% block title %}Our Teams | Boresha Kipaji League{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/teams.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- TEAMS HERO -->
+<section class="teams-hero">
+    <div class="section-shell">
+        <div class="teams-hero-content">
+            <span class="teams-kicker">BORESHA KIPAJI LEAGUE</span>
+
+            <h1>Meet the Teams</h1>
+
+            <p>
+                Discover the teams competing in Boresha Kipaji League.
+                Explore the clubs, their communities and the talent
+                shaping the future of football.
+            </p>
+
+            <a href="#all-teams" class="teams-hero-btn">
+                Explore Teams <span aria-hidden="true">↓</span>
+            </a>
+        </div>
+
+        <div class="teams-hero-decoration" aria-hidden="true">
+            <span class="hero-football">⚽</span>
+        </div>
+    </div>
+</section>
+
+
+<!-- TEAMS SECTION -->
+<section class="teams-section section" id="all-teams">
+    <div class="section-shell">
+
+        <div class="teams-section-heading">
+            <div>
+                <span class="section-kicker">THE COMPETITION</span>
+                <h2>League Teams</h2>
+                <p>
+                    Get to know the teams participating in our league.
+                </p>
+            </div>
+
+            {% if teams %}
+            <div class="teams-count">
+                <strong>{{ teams|length }}</strong>
+                <span>Registered Teams</span>
+            </div>
+            {% endif %}
+        </div>
+
+
+        {% if teams %}
+
+        <div class="teams-grid">
+
+            {% for team in teams %}
+
+            <article class="team-card">
+
+                <div class="team-card-top">
+                    <span class="team-number">
+                        TEAM {{ forloop.counter|stringformat:"02d" }}
+                    </span>
+
+                    <span class="team-status{% if not team.is_active %} team-status-inactive{% endif %}">
+                        <span></span> {% if team.is_active %}Active Team{% else %}Inactive Team{% endif %}
+                    </span>
+                </div>
+
+                <div class="team-identity">
+
+                    <div class="team-logo-placeholder" aria-hidden="true">
+                        <span>{{ team.short_name|default:team.name|first|upper }}</span>
+                    </div>
+
+                    <div class="team-information">
+                        <h3>{{ team.name }}</h3>
+
+                        <p>
+                            <span aria-hidden="true">📍</span>
+                            {{ team.county|default:"County pending" }}
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="team-card-footer">
+                    <span>BORESHA KIPAJI LEAGUE</span>
+                </div>
+
+            </article>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="teams-empty-state">
+            <div class="empty-football" aria-hidden="true">⚽</div>
+
+            <h3>No Teams Available Yet</h3>
+
+            <p>
+                Team information will appear here once teams
+                have been registered in the league system.
+            </p>
+        </div>
+
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

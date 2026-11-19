@@ -1,0 +1,68 @@
+{% extends 'base/public_base.html' %}
+{% load static %}
+
+{% block title %}{{ article.title|default:'News' }} | Boresha Kipaji League{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/news_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="news-detail-hero">
+    <div class="section-shell">
+
+        <span class="section-kicker">Boresha Kipaji League Newsroom</span>
+
+        {% if article %}
+
+            <h1>{{ article.title }}</h1>
+
+            {% if article.published_at %}
+                <div class="news-publication-date">
+                    <span aria-hidden="true">&#128197;</span>
+                    <time datetime="{{ article.published_at|date:'Y-m-d' }}">
+                        {{ article.published_at|date:'d M Y' }}
+                    </time>
+                </div>
+            {% endif %}
+
+        {% else %}
+
+            <h1>Article unavailable</h1>
+
+        {% endif %}
+
+    </div>
+</section>
+
+<section class="section news-detail-section">
+    <div class="section-shell">
+
+        {% if article %}
+
+            <article class="news-article">
+
+                <div class="news-article-label">
+                    <span></span>
+                    Official League Update
+                </div>
+
+                <div class="news-article-content">
+                    {{ article.content|safe }}
+                </div>
+
+            </article>
+
+        {% else %}
+
+            <div class="news-detail-empty">
+                {% include 'components/empty_state.html' with title='Article unavailable' message='This article has not been supplied.' %}
+            </div>
+
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

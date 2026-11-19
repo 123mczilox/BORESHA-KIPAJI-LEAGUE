@@ -1,0 +1,162 @@
+{% extends 'base/dashboard_base.html' %}
+{% load static %}
+
+{% block title %}
+Content Manager Dashboard | Boresha Kipaji League
+{% endblock %}
+
+{% block breadcrumb %}
+Content Management
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/content_manager.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<!-- Dashboard Welcome Section -->
+<section class="dashboard-welcome">
+
+    <div class="welcome-content">
+        <span class="welcome-label">
+            CONTENT MANAGEMENT
+        </span>
+
+        <h1>
+            Welcome back,
+            {{ request.user.get_full_name|default:request.user.username }}!
+        </h1>
+
+        <p>
+            Manage league news, announcements, media and published content
+            from one central workspace.
+        </p>
+    </div>
+
+    <div class="welcome-actions">
+        <button type="button" class="btn btn-primary" disabled>
+            + Create Content
+        </button>
+    </div>
+
+</section>
+
+
+<!-- Dashboard Statistics -->
+<section class="dashboard-stats">
+
+    <div class="stat-card">
+        <div class="stat-card-content">
+            <span>Total Articles</span>
+            <h2>{{ total_articles|default:"—" }}</h2>
+            <small>Data unavailable</small>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-card-content">
+            <span>Published Articles</span>
+            <h2>{{ published_articles|default:"—" }}</h2>
+            <small>Data unavailable</small>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-card-content">
+            <span>Draft Articles</span>
+            <h2>{{ draft_articles|default:"—" }}</h2>
+            <small>Data unavailable</small>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-card-content">
+            <span>Announcements</span>
+            <h2>{{ total_announcements|default:"—" }}</h2>
+            <small>Data unavailable</small>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- Main Dashboard Grid -->
+<section class="dashboard-content-grid">
+
+    <!-- Recent Content -->
+    <div class="dashboard-panel">
+
+        <div class="panel-header">
+            <div>
+                <h2>Recent Content</h2>
+                <p>Your latest content updates</p>
+            </div>
+
+            <span class="panel-action" aria-disabled="true">
+                View All
+            </span>
+        </div>
+
+        <div class="panel-body">
+
+            <div class="empty-state">
+                <h3>Content activity will appear here</h3>
+                <p>
+                    Your recent articles and announcements will be displayed
+                    once connected to the existing content data.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Quick Actions -->
+    <div class="dashboard-panel">
+
+        <div class="panel-header">
+            <div>
+                <h2>Quick Actions</h2>
+                <p>Common content management tasks</p>
+            </div>
+        </div>
+
+        <div class="quick-actions">
+
+            <span class="quick-action-item" aria-disabled="true">
+                <span class="quick-action-icon">✎</span>
+                <div>
+                    <strong>Create Article</strong>
+                    <small>Write and publish league news</small>
+                </div>
+                <span aria-hidden="true">›</span>
+            </span>
+
+            <span class="quick-action-item" aria-disabled="true">
+                <span class="quick-action-icon">▣</span>
+                <div>
+                    <strong>Manage Media</strong>
+                    <small>Organize images and media</small>
+                </div>
+                <span aria-hidden="true">›</span>
+            </span>
+
+            <span class="quick-action-item" aria-disabled="true">
+                <span class="quick-action-icon">▤</span>
+                <div>
+                    <strong>Announcements</strong>
+                    <small>Manage league announcements</small>
+                </div>
+                <span aria-hidden="true">›</span>
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

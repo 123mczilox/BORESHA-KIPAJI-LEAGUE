@@ -1,0 +1,169 @@
+<header class="dashboard-topbar">
+
+    <!-- Left Section -->
+    <div class="topbar-left">
+
+        <button
+            class="sidebar-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-label="Open sidebar"
+            aria-controls="dashboard-sidebar"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="topbar-heading">
+
+            <span class="topbar-eyebrow">
+                Boresha Kipaji League
+            </span>
+
+            <h1 class="topbar-title">
+                {{ dashboard_heading|default:'League Dashboard' }}
+            </h1>
+
+        </div>
+
+    </div>
+
+
+    <!-- Right Section -->
+    <div class="topbar-right">
+
+        <!-- Search -->
+        <form class="topbar-search" role="search" aria-label="Dashboard search">
+
+            <span class="search-icon" aria-hidden="true">⌕</span>
+
+            <input
+                type="search"
+                name="q"
+                placeholder="Search dashboard..."
+                aria-label="Search dashboard"
+            >
+
+            <span class="search-shortcut" aria-hidden="true">/</span>
+
+        </form>
+
+
+        <!-- Notifications -->
+        <div class="topbar-notifications">
+
+            {% include 'components/notification.html' %}
+
+        </div>
+
+
+        <!-- User Profile -->
+        <div class="topbar-profile">
+
+            <button
+                class="topbar-user-button"
+                type="button"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-controls="topbar-user-menu"
+            >
+
+                <span class="user-avatar" aria-hidden="true">
+                    {{ request.user.username|first|upper|default:'G' }}
+                </span>
+
+                <span class="user-details">
+
+                    <strong>
+                        {{ request.user.get_full_name|default:request.user.username|default:'Guest' }}
+                    </strong>
+
+                    <small>Account</small>
+
+                </span>
+
+                <span class="user-dropdown-arrow" aria-hidden="true">
+                    ⌄
+                </span>
+
+            </button>
+
+
+            <!-- Profile Dropdown -->
+            <div
+                class="topbar-user-menu"
+                id="topbar-user-menu"
+                role="menu"
+                hidden
+            >
+
+                <div class="user-menu-heading">
+
+                    <strong>
+                        {{ request.user.get_full_name|default:request.user.username|default:'Guest' }}
+                    </strong>
+
+                    {% if request.user.email %}
+                        <small>{{ request.user.email }}</small>
+                    {% endif %}
+
+                </div>
+
+
+                <div class="user-menu-divider"></div>
+
+
+                <!-- Placeholder until profile route is verified -->
+                <span
+                    class="user-menu-link"
+                    aria-disabled="true"
+                >
+                    <span aria-hidden="true">♙</span>
+                    My Profile
+                </span>
+
+
+                <!-- Placeholder until settings route is verified -->
+                <span
+                    class="user-menu-link"
+                    aria-disabled="true"
+                >
+                    <span aria-hidden="true">⚙</span>
+                    Settings
+                </span>
+
+
+                <div class="user-menu-divider"></div>
+
+
+                {% if request.user.is_authenticated %}
+
+                    <form
+                        method="post"
+                        action="{% url 'logout' %}"
+                        class="user-menu-logout-form"
+                    >
+
+                        {% csrf_token %}
+
+                        <button
+                            type="submit"
+                            class="user-menu-link user-menu-logout"
+                            role="menuitem"
+                        >
+                            <span aria-hidden="true">↪</span>
+                            Sign Out
+                        </button>
+
+                    </form>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>

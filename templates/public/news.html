@@ -1,0 +1,85 @@
+{% extends 'base/public_base.html' %}
+{% load static %}
+
+{% block title %}Latest News | Boresha Kipaji League{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/news.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="news-hero">
+    <div class="section-shell">
+        <span class="section-kicker">Boresha Kipaji League</span>
+        <h1>League Newsroom</h1>
+        <p>
+            Stay informed with the latest stories, announcements
+            and updates from across the league.
+        </p>
+    </div>
+</section>
+
+<section class="section news-section" id="news">
+    <div class="section-shell">
+
+        <div class="news-heading">
+            <div>
+                <span class="section-kicker">Latest Updates</span>
+                <h2>News & Stories</h2>
+                <p>Discover what's happening in the league.</p>
+            </div>
+
+            <div class="news-count">
+                <strong>{{ articles|length }}</strong>
+                <span>Articles</span>
+            </div>
+        </div>
+
+        {% if articles %}
+
+            <div class="news-grid">
+
+                {% for article in articles %}
+                    <article class="news-card">
+
+                        <div class="news-card-banner">
+                            <span>LEAGUE NEWS</span>
+                        </div>
+
+                        <div class="news-card-content">
+
+                            <span class="news-card-label">
+                                Boresha Kipaji League
+                            </span>
+
+                            <h3>{{ article.title }}</h3>
+
+                            {% if article.excerpt %}
+                                <p>{{ article.excerpt }}</p>
+                            {% else %}
+                                <p>
+                                    Read the latest update from
+                                    the Boresha Kipaji League newsroom.
+                                </p>
+                            {% endif %}
+
+                        </div>
+
+                    </article>
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="news-empty">
+                {% include 'components/empty_state.html' with title='No published articles' message='League news will appear when public article data is connected.' %}
+            </div>
+
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

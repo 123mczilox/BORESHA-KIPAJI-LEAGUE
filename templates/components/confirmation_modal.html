@@ -1,0 +1,37 @@
+<dialog
+    class="confirmation-modal"
+    id="confirmationModal"
+    aria-labelledby="confirmation-title"
+>
+    <form method="dialog">
+
+        <h2 id="confirmation-title">
+            {{ confirmation_title|default:'Confirm action' }}
+        </h2>
+
+        <p>
+            {{ confirmation_message|default:'Are you sure you want to continue?' }}
+        </p>
+
+        <div class="modal-actions">
+
+            <button
+                type="submit"
+                value="cancel"
+                class="btn btn-secondary"
+            >
+                Cancel
+            </button>
+
+            <button
+                type="submit"
+                value="confirm"
+                class="btn btn-primary"
+            >
+                Confirm
+            </button>
+
+        </div>
+
+    </form>
+</dialog>

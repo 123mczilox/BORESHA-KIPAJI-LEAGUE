@@ -1,0 +1,6 @@
+<section class="empty-card{% if compact %} compact{% endif %}">
+    {% if icon %}<span class="empty-icon" aria-hidden="true">{{ icon }}</span>{% endif %}
+    <span class="empty-label">{{ eyebrow|default:'Data pending' }}</span>
+    <h3>{{ title|default:'No information available' }}</h3>
+    {% if message %}<p>{{ message }}</p>{% endif %}
+</section>

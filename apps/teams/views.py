@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
+from django.db import DatabaseError
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 
@@ -27,9 +28,14 @@ def team_list(request):
 
     teams = teams.order_by('name')
 
+    try:
+        teams = list(teams)
+    except DatabaseError:
+        teams = []
+
     return render(
         request,
-        'teams/team_list.html',
+        'public/teams.html',
         {'teams': teams}
     )
 
@@ -40,7 +46,10 @@ def team_detail(request, pk):
     Inactive teams are visible only to League Admins.
     """
 
-    team = get_object_or_404(Team, pk=pk)
+    try:
+        team = get_object_or_404(Team, pk=pk)
+    except DatabaseError:
+        return render(request, 'public/team_detail.html', {'team': None})
 
     if not team.is_active:
         if not (
@@ -51,7 +60,7 @@ def team_detail(request, pk):
 
     return render(
         request,
-        'teams/team_detail.html',
+        'public/team_detail.html',
         {'team': team}
     )
 

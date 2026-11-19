@@ -1,0 +1,36 @@
+:root {
+    /* Brand colours */
+    --navy: #101D2D;
+    --navy-2: #172638;
+
+    --green: #138A50;
+    --green-dark: #08633A;
+    --green-light: #42C781;
+
+    --gold: #E8B33F;
+
+    /* Neutral colours */
+    --white: #FFFFFF;
+    --grey: #F4F6F8;
+    --text: #1C2A38;
+    --muted: #667585;
+    --line: #DEE5EA;
+
+    /* Additional interface colours */
+    --danger: #D64545;
+    --success-bg: #E9F6EF;
+    --surface: #FFFFFF;
+
+    /* Shadows */
+    --shadow-sm: 0 3px 12px rgba(16, 29, 45, 0.05);
+    --shadow-md: 0 8px 22px rgba(16, 29, 45, 0.08);
+
+    /* Border radius */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 12px;
+
+    /* Layout */
+    --sidebar-width: 260px;
+    --topbar-height: 78px;
+}

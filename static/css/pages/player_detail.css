@@ -1,0 +1,270 @@
+/* =========================================================
+   PLAYER DETAIL PAGE
+   Boresha Kipaji League
+========================================================= */
+
+.player-detail-hero {
+    padding: 55px 0 65px;
+    background: linear-gradient(120deg, #101D2D, #172F42);
+    color: #fff;
+}
+
+.player-detail-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 38px;
+    color: #AAB8C4;
+    font-size: 13px;
+}
+
+.player-detail-breadcrumb a {
+    color: #42C781;
+    text-decoration: none;
+}
+
+.player-detail-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.player-profile-header {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.player-profile-avatar {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 112px;
+    height: 112px;
+    border: 5px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    background: #138A50;
+}
+
+.player-profile-avatar span {
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+}
+
+.player-profile-heading .section-kicker {
+    color: #42C781;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.player-profile-heading h1 {
+    margin: 10px 0;
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(30px, 5vw, 44px);
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+.player-profile-heading p {
+    margin: 0;
+    color: #C5D0D9;
+    font-size: 14px;
+}
+
+
+/* PLAYER DETAILS SECTION */
+
+.player-detail-section {
+    min-height: 420px;
+    padding: 75px 0;
+    background: #F4F6F8;
+}
+
+.player-detail-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 310px;
+    align-items: start;
+    gap: 30px;
+}
+
+.player-detail-section-heading {
+    margin-bottom: 25px;
+}
+
+.player-detail-section-heading .section-kicker {
+    color: #138A50;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.player-detail-section-heading h2 {
+    margin: 10px 0 0;
+    color: #101D2D;
+    font-family: "Montserrat", sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+}
+
+
+/* INFORMATION CARD */
+
+.player-information-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 30px;
+    border: 1px solid #DEE5EA;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 3px 12px rgba(16, 29, 45, 0.04);
+}
+
+.player-information-icon {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: #E9F6EF;
+    color: #138A50;
+    font-size: 24px;
+}
+
+.player-information-card h3 {
+    margin: 3px 0 10px;
+    color: #101D2D;
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.player-information-card p {
+    margin: 0;
+    color: #667585;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+
+/* SIDEBAR */
+
+.player-sidebar-card {
+    padding: 25px;
+    border: 1px solid #DEE5EA;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 3px 12px rgba(16, 29, 45, 0.04);
+}
+
+.player-sidebar-card .section-kicker {
+    color: #138A50;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.player-sidebar-card h3 {
+    margin: 15px 0 10px;
+    color: #101D2D;
+    font-family: "Montserrat", sans-serif;
+    font-size: 19px;
+}
+
+.player-sidebar-card p {
+    margin: 0;
+    color: #667585;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.back-to-players {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 18px;
+    padding: 14px 18px;
+    border-radius: 6px;
+    background: #138A50;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.back-to-players:hover {
+    background: #08633A;
+}
+
+.back-to-players span {
+    font-size: 18px;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 800px) {
+    .player-detail-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .player-detail-sidebar {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .back-to-players {
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 520px) {
+    .player-detail-hero {
+        padding: 40px 0 50px;
+    }
+
+    .player-detail-breadcrumb {
+        margin-bottom: 28px;
+    }
+
+    .player-profile-header {
+        align-items: flex-start;
+        gap: 18px;
+    }
+
+    .player-profile-avatar {
+        width: 75px;
+        height: 75px;
+    }
+
+    .player-profile-avatar span {
+        font-size: 30px;
+    }
+
+    .player-profile-heading h1 {
+        font-size: 27px;
+    }
+
+    .player-detail-section {
+        padding: 50px 0;
+    }
+
+    .player-detail-sidebar {
+        grid-template-columns: 1fr;
+    }
+
+    .player-information-card {
+        flex-direction: column;
+        padding: 22px;
+    }
+}

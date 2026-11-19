@@ -1,0 +1,5 @@
+{% extends 'base/dashboard_base.html' %}
+{% block title %}Fantasy Dashboard{% endblock %}
+{% block breadcrumb %}Fantasy{% endblock %}
+{% block extra_css %}{% load static %}<link rel="stylesheet" href="{% static 'css/pages/fantasy.css' %}">{% endblock %}
+{% block content %}<section class="fantasy-page"><article class="dashboard-panel"><h1>Fantasy Football</h1>{% include 'components/empty_state.html' with title='Fantasy data pending' message='No fantasy team or gameweek data has been supplied.' %}</article></section>{% endblock %}

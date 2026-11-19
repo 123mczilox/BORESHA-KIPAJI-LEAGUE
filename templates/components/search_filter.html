@@ -1,0 +1,6 @@
+<form class="search-filter" method="get" role="search">
+    <label class="sr-only" for="page-search">Search</label>
+    <input id="page-search" type="search" name="q" value="{{ request.GET.q|default:'' }}" placeholder="Search">
+    {% block filter_fields %}{% endblock %}
+    <button type="submit">Search</button>
+</form>

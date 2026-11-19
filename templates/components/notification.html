@@ -1,0 +1,120 @@
+<div class="notification-wrapper">
+
+    <!-- Notification Trigger -->
+    <button
+        class="notification-button"
+        type="button"
+        aria-haspopup="true"
+        aria-label="Notifications{% if notification_count %}, {{ notification_count }} unread{% endif %}"
+        aria-expanded="false"
+        aria-controls="notification-dropdown"
+    >
+
+        <span class="notification-bell" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 8a6 6 0 1 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10 21h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+        </span>
+
+        {% if notification_count %}
+            <span class="notification-count" aria-hidden="true">
+                {{ notification_count }}
+            </span>
+        {% endif %}
+
+    </button>
+
+
+    <!-- Notification Dropdown -->
+    <div
+        class="notification-dropdown"
+        id="notification-dropdown"
+        role="region"
+        aria-label="Notifications"
+        hidden
+    >
+
+        <!-- Header -->
+        <div class="notification-header">
+
+            <div>
+                <h3>Notifications</h3>
+                <p>Stay updated with league activities</p>
+            </div>
+
+            {% if notification_count %}
+                <span class="notification-header-count">
+                    {{ notification_count }} unread
+                </span>
+            {% endif %}
+
+        </div>
+
+
+        <!-- Notification List -->
+        <div class="notification-list">
+
+            {% if notifications %}
+
+                {% for notification in notifications %}
+
+                    <article class="notification-item">
+
+                        {% if notification.title %}
+                            <strong>{{ notification.title }}</strong>
+                        {% endif %}
+
+                        {% if notification.message %}
+                            <p>{{ notification.message }}</p>
+                        {% elif notification.text %}
+                            <p>{{ notification.text }}</p>
+                        {% endif %}
+
+                        {% if notification.created_at %}
+                            <time datetime="{{ notification.created_at|date:'c' }}">
+                                {{ notification.created_at|date:'d M Y, H:i' }}
+                            </time>
+                        {% endif %}
+
+                    </article>
+
+                {% endfor %}
+
+            {% else %}
+
+                <!-- Empty State -->
+                <div class="notification-empty">
+
+                    <span class="notification-empty-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18 8a6 6 0 1 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M10 21h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+
+                    <strong>You're all caught up!</strong>
+
+                    <p>
+                        New league updates will appear here.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- Footer -->
+        <div class="notification-footer">
+
+            <span class="view-all-notifications" aria-disabled="true">
+                View all notifications
+            </span>
+
+        </div>
+
+    </div>
+
+</div>

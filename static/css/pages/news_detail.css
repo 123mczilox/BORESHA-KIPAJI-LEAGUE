@@ -1,0 +1,149 @@
+/* =========================================================
+   NEWS DETAIL PAGE
+   Boresha Kipaji League
+========================================================= */
+
+.news-detail-hero {
+    padding: 75px 0;
+    background: linear-gradient(120deg, #101D2D, #172F42);
+    color: #fff;
+}
+
+.news-detail-hero .section-kicker {
+    color: #42C781;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.news-detail-hero h1 {
+    max-width: 900px;
+    margin: 18px 0 25px;
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(30px, 5vw, 48px);
+    font-weight: 800;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+}
+
+.news-publication-date {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #D5DEE5;
+    font-size: 14px;
+}
+
+
+/* ARTICLE SECTION */
+
+.news-detail-section {
+    min-height: 450px;
+    padding: 70px 0 90px;
+    background: #F4F6F8;
+}
+
+.news-article {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 45px;
+    border: 1px solid #DEE5EA;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 3px 15px rgba(16, 29, 45, 0.04);
+}
+
+.news-article-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    color: #138A50;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.news-article-label span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #138A50;
+}
+
+
+/* ARTICLE CONTENT */
+
+.news-article-content {
+    color: #354453;
+    font-size: 16px;
+    line-height: 1.9;
+    overflow-wrap: anywhere;
+}
+
+.news-article-content h2,
+.news-article-content h3,
+.news-article-content h4 {
+    margin: 30px 0 15px;
+    color: #101D2D;
+    font-family: "Montserrat", sans-serif;
+    line-height: 1.4;
+}
+
+.news-article-content p {
+    margin: 0 0 20px;
+}
+
+.news-article-content ul,
+.news-article-content ol {
+    margin: 15px 0 25px;
+    padding-left: 25px;
+}
+
+.news-article-content li {
+    margin-bottom: 10px;
+}
+
+.news-article-content a {
+    color: #138A50;
+    text-decoration: underline;
+}
+
+.news-article-content img {
+    max-width: 100%;
+    height: auto;
+    margin: 25px auto;
+    border-radius: 8px;
+}
+
+.news-article-content blockquote {
+    margin: 25px 0;
+    padding: 18px 25px;
+    border-left: 4px solid #138A50;
+    background: #F4F6F8;
+    color: #526273;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 600px) {
+    .news-detail-hero {
+        padding: 55px 0;
+    }
+
+    .news-detail-section {
+        padding: 45px 0 60px;
+    }
+
+    .news-article {
+        padding: 25px 20px;
+    }
+
+    .news-article-content {
+        font-size: 14px;
+    }
+}

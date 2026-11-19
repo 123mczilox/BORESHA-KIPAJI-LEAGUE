@@ -1,4 +1,6 @@
+from django.db import DatabaseError
 from django.http import Http404, JsonResponse
+from django.shortcuts import render
 from django.views.decorators.http import require_GET
 
 from apps.matches.models import Season, SeasonTeam
@@ -25,9 +27,24 @@ def _requested_season(request):
 
 @require_GET
 def league_table(request):
-	season = _requested_season(request)
+	try:
+		season = _requested_season(request)
+		return _league_table_response(request, season)
+	except DatabaseError:
+		if request.headers.get('Sec-Fetch-Dest') == 'document':
+			return render(request, 'public/standings.html', {
+				'season': None,
+				'standings': [],
+			})
+		raise
+
+
+def _league_table_response(request, season):
 	if season is None:
-		return JsonResponse({'season': None, 'standings': []})
+		payload = {'season': None, 'standings': []}
+		if request.headers.get('Sec-Fetch-Dest') == 'document':
+			return render(request, 'public/standings.html', payload)
+		return JsonResponse(payload)
 
 	memberships = SeasonTeam.objects.filter(
 		season=season,
@@ -62,7 +79,13 @@ def league_table(request):
 		})
 	standings.sort(key=lambda row: row['points'], reverse=True)
 
-	return JsonResponse({
+	payload = {
 		'season': {'id': season.pk, 'name': season.name, 'year': season.year},
 		'standings': standings,
-	})
+	}
+	if request.headers.get('Sec-Fetch-Dest') == 'document':
+		return render(request, 'public/standings.html', {
+			'season': payload['season'],
+			'standings': standings,
+		})
+	return JsonResponse(payload)

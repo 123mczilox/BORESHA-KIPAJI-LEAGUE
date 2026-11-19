@@ -1,0 +1,105 @@
+{% extends 'base/public_base.html' %}
+{% load static %}
+
+{% block title %}Contact Us | Boresha Kipaji League{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/contact.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- CONTACT HERO -->
+<section class="contact-hero">
+    <div class="section-shell">
+
+        <span class="section-kicker">Get In Touch</span>
+
+        <h1>Contact the League</h1>
+
+        <p>
+            Have a question, suggestion or want to learn more about
+            Boresha Kipaji League? We look forward to hearing from you.
+        </p>
+
+    </div>
+</section>
+
+
+<!-- CONTACT CONTENT -->
+<section class="section contact-section">
+    <div class="section-shell">
+
+        <div class="contact-layout">
+
+            <!-- CONTACT INTRODUCTION -->
+            <div class="contact-intro">
+
+                <span class="section-kicker">Let's Connect</span>
+
+                <h2>We're Here to Connect</h2>
+
+                <p>
+                    Boresha Kipaji League is committed to growing
+                    football talent and strengthening the local
+                    football community.
+                </p>
+
+                <p>
+                    We welcome communication from players, teams,
+                    supporters, potential partners and members
+                    of the wider football community.
+                </p>
+
+                <div class="contact-highlight">
+                    <span class="contact-highlight-icon" aria-hidden="true">
+                        &#9733;
+                    </span>
+
+                    <div>
+                        <h3>Growing Together</h3>
+                        <p>
+                            Your interest and participation contribute
+                            to the continued development of the league.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- CONTACT DETAILS -->
+            <div class="contact-information-card">
+
+                <div class="contact-card-heading">
+                    <span class="section-kicker">Official Information</span>
+                    <h2>Contact Information</h2>
+                </div>
+
+                {% include 'components/empty_state.html' with title='Contact details pending' message='Official contact details and social media accounts will be published here once verified.' %}
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- CLOSING SECTION -->
+<section class="contact-closing">
+    <div class="section-shell">
+
+        <span class="section-kicker">Boresha Kipaji League</span>
+
+        <h2>Let's Grow Football Together</h2>
+
+        <p>
+            Building opportunities, developing talent and
+            strengthening our football community.
+        </p>
+
+    </div>
+</section>
+
+{% endblock %}

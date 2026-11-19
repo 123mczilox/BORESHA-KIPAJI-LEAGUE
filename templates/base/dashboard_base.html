@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#101D2D">
+    <meta name="description" content="Boresha Kipaji League Management Dashboard">
+
+    <title>{% block title %}Dashboard | Boresha Kipaji League{% endblock %}</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Core Stylesheets -->
+    <link rel="stylesheet" href="{% static 'css/variables.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+
+    <!-- Page-specific CSS -->
+    {% block extra_css %}{% endblock %}
+
+</head>
+
+<body class="dashboard-layout {% block body_class %}{% endblock %}">
+    <!-- Accessibility: Skip navigation -->
+    <a href="#dashboard-content" class="skip-link">
+        Skip to main content
+    </a>
+
+
+    <!-- Dashboard Sidebar -->
+    {% include 'components/sidebar.html' %}
+
+    <!-- Main Dashboard Container -->
+    <div class="dashboard-shell">
+
+        <!-- Top Navigation -->
+        {% include 'components/topbar.html' %}
+
+        <!-- Dashboard Content -->
+        <main
+            class="dashboard-main"
+            id="dashboard-content"
+            tabindex="-1"
+        >
+
+            <!-- Breadcrumb Navigation -->
+            <nav class="breadcrumbs" aria-label="Breadcrumb">
+                <ol class="breadcrumb-list">
+                    <li class="breadcrumb-item">
+                        <a href="/" class="breadcrumb-home">
+                            <span class="breadcrumb-home-icon" aria-hidden="true">⌂</span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-separator" aria-hidden="true">›</li>
+                    <li class="breadcrumb-item">
+                        <span class="breadcrumb-current" aria-current="page">
+                            {% block breadcrumb %}Dashboard{% endblock %}
+                        </span>
+                    </li>
+                </ol>
+            </nav>
+
+            <!-- Individual Dashboard Content -->
+            {% block content %}{% endblock %}
+
+        </main>
+
+    </div>
+
+    {% include 'components/confirmation_modal.html' %}
+
+    <!-- Core JavaScript -->
+    <script src="{% static 'js/main.js' %}" defer></script>
+    <script src="{% static 'js/sidebar.js' %}" defer></script>
+    <script src="{% static 'js/notifications.js' %}" defer></script>
+    <script src="{% static 'js/modals.js' %}" defer></script>
+    <script src="{% static 'js/tables.js' %}" defer></script>
+
+    <!-- Page-specific JavaScript -->
+    {% block extra_js %}{% endblock %}
+
+</body>
+</html>

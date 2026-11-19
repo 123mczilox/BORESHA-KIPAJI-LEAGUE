@@ -1,0 +1,157 @@
+{% extends 'base/public_base.html' %}
+{% load static %}
+
+{% block title %}Match Results | Boresha Kipaji League{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/results.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- RESULTS HERO -->
+<section class="results-hero">
+    <div class="section-shell">
+
+        <div class="results-hero-content">
+            <span class="results-kicker">BORESHA KIPAJI LEAGUE</span>
+
+            <h1>Match Results</h1>
+
+            <p>
+                Catch up on completed matches, final scores and
+                the latest outcomes from across the league.
+            </p>
+
+            <a href="#latest-results" class="results-hero-btn">
+                View Results <span aria-hidden="true">↓</span>
+            </a>
+        </div>
+
+        <div class="results-hero-decoration" aria-hidden="true">
+            🏆
+        </div>
+
+    </div>
+</section>
+
+
+<!-- RESULTS SECTION -->
+<section class="results-section section" id="latest-results">
+    <div class="section-shell">
+
+        <div class="results-heading">
+            <div>
+                <span class="section-kicker">MATCH CENTRE</span>
+                <h2>Latest Results</h2>
+                <p>Final scores from completed league matches.</p>
+            </div>
+
+            {% if results %}
+            <div class="results-count">
+                <strong>{{ results|length }}</strong>
+                <span>Completed Matches</span>
+            </div>
+            {% endif %}
+        </div>
+
+
+        {% if results %}
+
+        <div class="results-grid">
+
+            {% for result in results %}
+
+            <article class="result-card">
+
+                <div class="result-card-header">
+                    <span class="result-match-number">
+                        MATCH {{ forloop.counter|stringformat:"02d" }}
+                    </span>
+
+                    <span class="result-status">
+                        <span></span> Full Time
+                    </span>
+                </div>
+
+
+                <div class="result-card-body">
+
+                    <!-- HOME TEAM -->
+                    <div class="result-team home-team">
+
+                        <div class="result-team-badge" aria-hidden="true">
+                            {{ result.home_team|first|upper }}
+                        </div>
+
+                        <strong>{{ result.home_team }}</strong>
+
+                        <span>Home</span>
+
+                    </div>
+
+
+                    <!-- FINAL SCORE -->
+                    <div class="result-score">
+
+                        <div class="score-display">
+                            <span>{{ result.home_score }}</span>
+                            <span class="score-divider">:</span>
+                            <span>{{ result.away_score }}</span>
+                        </div>
+
+                        <span class="full-time-label">FT</span>
+
+                    </div>
+
+
+                    <!-- AWAY TEAM -->
+                    <div class="result-team away-team">
+
+                        <div class="result-team-badge" aria-hidden="true">
+                            {{ result.away_team|first|upper }}
+                        </div>
+
+                        <strong>{{ result.away_team }}</strong>
+
+                        <span>Away</span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="result-card-footer">
+                    <span>BORESHA KIPAJI LEAGUE</span>
+                    <span class="result-footer-icon" aria-hidden="true">⚽</span>
+                </div>
+
+            </article>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="results-empty-state">
+
+            <div class="results-empty-icon" aria-hidden="true">
+                ⚽
+            </div>
+
+            <h3>No Match Results Yet</h3>
+
+            <p>
+                Completed match results will appear here once
+                official scores have been recorded in the league system.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

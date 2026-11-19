@@ -1,0 +1,129 @@
+{% extends 'base/public_base.html' %}
+{% load static %}
+
+{% block title %}Our Sponsors | Boresha Kipaji League{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/sponsors.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- SPONSORS HERO -->
+<section class="sponsors-hero">
+    <div class="section-shell">
+
+        <span class="section-kicker">Stronger Together</span>
+
+        <h1>Our Sponsors & Partners</h1>
+
+        <p>
+            Recognising the organisations and partners supporting
+            talent development and the growth of football through
+            Boresha Kipaji League.
+        </p>
+
+        <a href="#our-sponsors" class="sponsors-hero-btn">
+            Meet Our Partners
+            <span aria-hidden="true">&rarr;</span>
+        </a>
+
+    </div>
+</section>
+
+
+<!-- SPONSORS DIRECTORY -->
+<section class="section sponsors-section" id="our-sponsors">
+
+    <div class="section-shell">
+
+        <div class="sponsors-heading">
+            <div>
+                <span class="section-kicker">Our Partners</span>
+                <h2>Supporting the League</h2>
+                <p>
+                    We appreciate the partners who contribute
+                    to the league's continued growth.
+                </p>
+            </div>
+
+            <div class="sponsors-count">
+                <strong>{{ sponsors|length }}</strong>
+                <span>Sponsors</span>
+            </div>
+        </div>
+
+
+        {% if sponsors %}
+
+            <div class="sponsor-grid">
+
+                {% for sponsor in sponsors %}
+
+                    <article class="sponsor-card">
+
+                        <div class="sponsor-card-top">
+                            <span class="sponsor-label">Official Partner</span>
+                        </div>
+
+                        <div class="sponsor-logo-area">
+
+                            {% if sponsor.logo %}
+                                <img
+                                    src="{{ sponsor.logo.url }}"
+                                    alt="{{ sponsor.name }} logo"
+                                    loading="lazy"
+                                >
+                            {% else %}
+                                <div class="sponsor-name-placeholder">
+                                    <span aria-hidden="true">&#9733;</span>
+                                    <strong>{{ sponsor.name }}</strong>
+                                </div>
+                            {% endif %}
+
+                        </div>
+
+                        <div class="sponsor-card-footer">
+                            <h3>{{ sponsor.name }}</h3>
+                            <span>League Partner</span>
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="sponsors-empty">
+                {% include 'components/empty_state.html' with title='Sponsor information unavailable' message='No active sponsor information has been supplied.' %}
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<!-- PARTNERSHIP MESSAGE -->
+<section class="partnership-section">
+    <div class="section-shell">
+
+        <div class="partnership-content">
+            <span class="section-kicker">Building the Future</span>
+
+            <h2>Partnership Makes Progress Possible</h2>
+
+            <p>
+                Together, we can create more opportunities,
+                support emerging football talent and strengthen
+                the future of the game.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

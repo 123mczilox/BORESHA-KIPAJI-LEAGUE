@@ -1,0 +1,12 @@
+<footer class="public-footer">
+    <div class="section-shell footer-grid">
+        <div class="footer-brand">
+            <a class="nav-brand footer-logo" href="/"><span class="brand-mark">BK</span><span class="brand-name">Boresha <strong>Kipaji League</strong></span></a>
+            <p>Football. Talent. Opportunity.</p>
+        </div>
+        <div><h3>Explore</h3><a href="/#about">About</a><a href="{% url 'teams:team_list' %}">Teams</a><a href="{% url 'players:player_list' %}">Players</a></div>
+        <div><h3>Competitions</h3><a href="/#fixtures">Fixtures</a><a href="/#results">Results</a><a href="/#standings">Standings</a></div>
+        <div><h3>Account</h3><a href="{% url 'login' %}">Sign In</a><a href="{% url 'register' %}">Register</a></div>
+    </div>
+    <div class="footer-bottom"><div class="section-shell"><span>&copy; {% now 'Y' %} Boresha Kipaji League.</span><span>All rights reserved.</span></div></div>
+</footer>

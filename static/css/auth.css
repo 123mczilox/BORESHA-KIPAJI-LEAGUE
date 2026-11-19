@@ -1,0 +1,369 @@
+/* ==================================
+   BORESHA KIPAJI LEAGUE AUTH STYLES
+================================== */
+
+:root {
+    --navy: #101d2d;
+    --green: #138a50;
+    --dark-green: #08633a;
+    --white: #ffffff;
+    --light: #f4f6f8;
+    --text: #263445;
+    --muted: #788493;
+    --border: #dfe5eb;
+    --red: #dc4545;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--light);
+    color: var(--text);
+}
+
+.auth-wrapper {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+/* LEFT VISUAL PANEL */
+
+.auth-visual {
+    position: relative;
+    min-height: 100vh;
+    background:
+    linear-gradient(
+        90deg,
+        rgba(8, 20, 34, 0.94) 0%,
+        rgba(8, 20, 34, 0.76) 55%,
+        rgba(8, 20, 34, 0.48) 100%
+    ),
+    url("../images/hero/auth-stadium.jpg");
+
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+}
+
+.visual-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(19, 138, 80, 0.20),
+        transparent
+    );
+}
+
+.visual-content {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    padding: 45px 55px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: var(--white);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.brand-icon {
+    font-size: 30px;
+}
+
+.visual-message {
+    max-width: 550px;
+}
+
+.eyebrow {
+    display: block;
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+}
+
+.visual-message .eyebrow {
+    color: #55d993;
+}
+
+.visual-message h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(38px, 4vw, 58px);
+    line-height: 1.15;
+    margin-bottom: 24px;
+}
+
+.visual-message h1 span {
+    color: #42c781;
+}
+
+.visual-message p {
+    color: #d8e1e9;
+    font-size: 16px;
+    line-height: 1.8;
+    max-width: 450px;
+}
+
+.visual-footer {
+    color: #b9c5d0;
+    font-size: 13px;
+}
+
+/* RIGHT FORM PANEL */
+
+.auth-form-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 55px 35px 25px;
+    background: white;
+}
+
+.auth-form-container {
+    width: 100%;
+    max-width: 440px;
+}
+
+.auth-heading {
+    margin-bottom: 32px;
+}
+
+.auth-heading h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 29px;
+    color: var(--navy);
+    margin-bottom: 12px;
+}
+
+.auth-heading p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* FORM */
+
+.auth-form {
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 21px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 9px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+}
+
+/* Django form fields */
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    min-height: 49px;
+    padding: 13px 15px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: white;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(19, 138, 80, 0.10);
+}
+
+.form-group input::placeholder {
+    color: #aab3bd;
+}
+
+.form-help {
+    display: block;
+    margin-top: 7px;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.form-help ul {
+    padding-left: 18px;
+}
+
+.field-error {
+    display: block;
+    color: var(--red);
+    margin-top: 7px;
+    font-size: 12px;
+}
+
+/* BUTTON */
+
+.auth-button {
+    width: 100%;
+    min-height: 52px;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 7px;
+    background: var(--green);
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    transition: 0.3s ease;
+}
+
+.auth-button:hover {
+    background: var(--dark-green);
+    transform: translateY(-2px);
+}
+
+.auth-button span {
+    font-size: 19px;
+}
+
+/* ACCOUNT SWITCH */
+
+.auth-switch {
+    margin-top: 28px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.auth-switch a {
+    color: var(--green);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.auth-switch a:hover {
+    text-decoration: underline;
+}
+
+/* ALERTS */
+
+.alert {
+    padding: 13px 15px;
+    border-radius: 7px;
+    margin-bottom: 20px;
+    font-size: 13px;
+}
+
+.alert-error {
+    color: #a52828;
+    background: #fff0f0;
+    border: 1px solid #ffd1d1;
+}
+
+.alert ul {
+    padding-left: 18px;
+}
+
+/* MOBILE BRAND */
+
+.auth-mobile-brand {
+    display: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    color: var(--navy);
+    font-size: 19px;
+    margin-bottom: 45px;
+}
+
+.auth-mobile-brand span {
+    margin-right: 8px;
+}
+
+/* BOTTOM */
+
+.auth-bottom {
+    margin-top: 55px;
+    text-align: center;
+    color: #9aa4af;
+    font-size: 11px;
+}
+
+/* RESPONSIVENESS */
+
+@media (max-width: 900px) {
+
+    .auth-wrapper {
+        grid-template-columns: 40% 60%;
+    }
+
+    .visual-content {
+        padding: 35px 25px;
+    }
+
+    .visual-message h1 {
+        font-size: 37px;
+    }
+
+}
+
+@media (max-width: 650px) {
+
+    .auth-wrapper {
+        display: block;
+    }
+
+    .auth-visual {
+        display: none;
+    }
+
+    .auth-form-section {
+        min-height: 100vh;
+        padding: 35px 24px;
+        justify-content: center;
+    }
+
+    .auth-mobile-brand {
+        display: block;
+        width: 100%;
+        max-width: 440px;
+    }
+
+    .auth-heading h2 {
+        font-size: 25px;
+    }
+
+    .auth-bottom {
+        margin-top: 40px;
+    }
+
+}

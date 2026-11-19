@@ -1,0 +1,87 @@
+{% extends 'base/public_base.html' %}
+{% load static %}
+
+{% block title %}Fixtures | Boresha Kipaji League{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/fixtures.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- FIXTURES HERO -->
+<section class="fixtures-hero">
+    <div class="section-shell">
+        <div class="fixtures-hero-content">
+            <span class="fixtures-kicker">BORESHA KIPAJI LEAGUE</span>
+
+            <h1>Match Fixtures</h1>
+
+            <p>
+                Stay updated with upcoming league matches.
+                Follow the teams, prepare for match days and never
+                miss the action.
+            </p>
+
+            <a href="#upcoming-fixtures" class="fixtures-hero-btn">
+                Explore Fixtures <span aria-hidden="true">↓</span>
+            </a>
+        </div>
+
+        <div class="fixtures-hero-decoration" aria-hidden="true">
+            ⚽
+        </div>
+    </div>
+</section>
+
+
+<!-- FIXTURES CONTENT -->
+<section class="fixtures-section section" id="upcoming-fixtures">
+    <div class="section-shell">
+
+        <div class="fixtures-heading">
+            <div>
+                <span class="section-kicker">THE MATCH SCHEDULE</span>
+                <h2>Upcoming Matches</h2>
+                <p>Explore the fixtures scheduled for the competition.</p>
+            </div>
+
+            {% if fixtures %}
+            <div class="fixtures-count">
+                <strong>{{ fixtures|length }}</strong>
+                <span>Fixtures Available</span>
+            </div>
+            {% endif %}
+        </div>
+
+
+        {% if fixtures %}
+
+        <div class="fixture-grid">
+
+            {% for fixture in fixtures %}
+
+            <article class="fixture-card">
+
+                <div class="fixture-card-header">
+                    <span class="fixture-number">
+                        MATCH {{ forloop.counter|stringformat:"02d" }}
+                    </span>
+
+                    <span class="fixture-status">
+                        Upcoming Fixture
+                    </span>
+                </div>
+
+                <div class="fixture-card-body">
+
+                    <div class="fixture-team">
+                        <div class="fixture-team-badge" aria-hidden="true">
+                            {{ fixture.home_team|first|upper }}
+                        </div>
+
+                        <strong>{{ fixture.home_team }}</strong>
+                        <span>Home</span>
+                    </div>
+
+                    <div class

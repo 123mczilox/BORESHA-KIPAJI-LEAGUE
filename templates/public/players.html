@@ -1,0 +1,106 @@
+{% extends 'base/public_base.html' %}
+{% load static %}
+
+{% block title %}Players | Boresha Kipaji League{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/players.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- Players Hero -->
+<section class="players-hero">
+    <div class="section-shell">
+        <div class="players-hero-content">
+            <span class="section-kicker">The Talent</span>
+
+            <h1>Meet the League Players</h1>
+
+            <p>
+                Discover the players bringing skill, passion and
+                determination to the Boresha Kipaji League.
+            </p>
+
+            <a href="#players-directory" class="players-hero-btn">
+                Explore Players
+                <span aria-hidden="true">&rarr;</span>
+            </a>
+        </div>
+
+        <div class="players-hero-decoration" aria-hidden="true">
+            <span class="decoration-circle circle-one"></span>
+            <span class="decoration-circle circle-two"></span>
+            <span class="decoration-text">BKL</span>
+        </div>
+    </div>
+</section>
+
+
+<!-- Players Directory -->
+<section class="section players-directory" id="players-directory">
+    <div class="section-shell">
+
+        <div class="players-section-heading">
+            <div>
+                <span class="section-kicker">Player Directory</span>
+                <h2>League Players</h2>
+                <p>Explore the talent participating in the league.</p>
+            </div>
+
+            <div class="players-count">
+                <strong>{{ players|length }}</strong>
+                <span>Players</span>
+            </div>
+        </div>
+
+        {% include 'components/search_filter.html' %}
+
+        {% if players %}
+            <div class="players-grid">
+
+                {% for player in players %}
+                    <article class="player-card">
+
+                        <div class="player-card-top">
+                            <span class="player-number">
+                                {{ forloop.counter|stringformat:"02d" }}
+                            </span>
+
+                            <span class="player-badge">
+                                League Player
+                            </span>
+                        </div>
+
+                        <div class="player-avatar" aria-hidden="true">
+                            <span>{{ forloop.counter|stringformat:"02d" }}</span>
+                        </div>
+
+                        <div class="player-card-info">
+                            <span class="player-card-label">Player</span>
+
+                            <h3>{{ player }}</h3>
+
+                            <div class="player-position">
+                                <span class="position-dot"></span>
+                                {{ player.position|default:"Position pending" }}
+                            </div>
+                        </div>
+
+                    </article>
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="players-empty-state">
+                {% include 'components/empty_state.html' with title='No players available' message='Player information will appear when it is supplied.' %}
+            </div>
+
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

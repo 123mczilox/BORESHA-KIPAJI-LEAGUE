@@ -1,0 +1,374 @@
+/* =========================================================
+   PLAYERS PAGE
+   Boresha Kipaji League
+========================================================= */
+
+/* HERO */
+
+.players-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 90px 0;
+    background: linear-gradient(120deg, #101D2D, #172F42);
+    color: #fff;
+}
+
+.players-hero .section-shell {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 220px;
+}
+
+.players-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 650px;
+}
+
+.players-hero .section-kicker {
+    display: inline-block;
+    margin-bottom: 16px;
+    color: #42C781;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.players-hero h1 {
+    margin: 0 0 18px;
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(34px, 5vw, 56px);
+    font-weight: 800;
+    line-height: 1.15;
+}
+
+.players-hero p {
+    max-width: 540px;
+    margin: 0 0 28px;
+    color: #D5DEE5;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.players-hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 22px;
+    border-radius: 6px;
+    background: #138A50;
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.players-hero-btn:hover {
+    background: #08633A;
+    transform: translateY(-2px);
+}
+
+.players-hero-btn span {
+    font-size: 20px;
+}
+
+
+/* HERO DECORATION */
+
+.players-hero-decoration {
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    width: 300px;
+    height: 300px;
+    transform: translateY(-50%);
+}
+
+.decoration-circle {
+    position: absolute;
+    display: block;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+}
+
+.circle-one {
+    inset: 0;
+}
+
+.circle-two {
+    inset: 35px;
+}
+
+.decoration-text {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: rgba(255, 255, 255, 0.07);
+    font-family: "Montserrat", sans-serif;
+    font-size: 100px;
+    font-weight: 900;
+}
+
+
+/* DIRECTORY */
+
+.players-directory {
+    padding: 75px 0 90px;
+    background: #F4F6F8;
+}
+
+.players-section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.players-section-heading .section-kicker {
+    color: #138A50;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+}
+
+.players-section-heading h2 {
+    margin: 9px 0;
+    color: #101D2D;
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(26px, 3vw, 36px);
+    font-weight: 800;
+}
+
+.players-section-heading p {
+    margin: 0;
+    color: #667585;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.players-count {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 90px;
+    min-height: 80px;
+    padding: 12px;
+    border: 1px solid #DEE5EA;
+    border-radius: 10px;
+    background: #fff;
+}
+
+.players-count strong {
+    color: #138A50;
+    font-size: 27px;
+    font-weight: 800;
+}
+
+.players-count span {
+    color: #667585;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* PLAYER GRID */
+
+.players-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    margin-top: 28px;
+}
+
+
+/* PLAYER CARD */
+
+.player-card {
+    position: relative;
+    overflow: hidden;
+    padding: 22px;
+    border: 1px solid #DEE5EA;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 3px 12px rgba(16, 29, 45, 0.04);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.player-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(16, 29, 45, 0.09);
+}
+
+.player-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.player-number {
+    color: #138A50;
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.player-badge {
+    padding: 6px 10px;
+    border-radius: 20px;
+    background: #E9F6EF;
+    color: #08633A;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.player-avatar {
+    display: grid;
+    place-items: center;
+    width: 76px;
+    height: 76px;
+    margin: 25px auto 20px;
+    border: 5px solid #E9F6EF;
+    border-radius: 50%;
+    background: #138A50;
+}
+
+.player-avatar span {
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.player-card-info {
+    text-align: center;
+}
+
+.player-card-label {
+    display: block;
+    margin-bottom: 7px;
+    color: #8A98A5;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.player-card-info h3 {
+    margin: 0 0 13px;
+    color: #101D2D;
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+.player-position {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 13px;
+    border-radius: 20px;
+    background: #F4F6F8;
+    color: #667585;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.position-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #138A50;
+}
+
+
+/* EMPTY STATE */
+
+.players-empty-state {
+    margin-top: 25px;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 980px) {
+    .players-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .players-hero-decoration {
+        right: -70px;
+        opacity: 0.6;
+    }
+}
+
+@media (max-width: 600px) {
+    .players-hero {
+        padding: 65px 0;
+    }
+
+    .players-hero .section-shell {
+        min-height: auto;
+    }
+
+    .players-hero-decoration {
+        right: -150px;
+        opacity: 0.35;
+    }
+
+    .players-hero-content {
+        max-width: 100%;
+    }
+
+    .players-hero h1 {
+        font-size: 34px;
+    }
+
+    .players-hero p {
+        font-size: 14px;
+    }
+
+    .players-directory {
+        padding: 55px 0 65px;
+    }
+
+    .players-section-heading {
+        align-items: flex-start;
+    }
+
+    .players-count {
+        min-width: 70px;
+        min-height: 70px;
+    }
+
+    .players-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .player-card {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 380px) {
+    .players-section-heading {
+        flex-direction: column;
+    }
+
+    .players-count {
+        flex-direction: row;
+        gap: 8px;
+        min-height: auto;
+    }
+}

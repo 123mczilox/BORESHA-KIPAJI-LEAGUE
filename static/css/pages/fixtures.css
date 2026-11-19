@@ -1,0 +1,338 @@
+/* =====================================================
+   BORESHA KIPAJI LEAGUE
+   PUBLIC FIXTURES PAGE
+===================================================== */
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.fixtures-hero {
+    padding: 80px 0;
+    overflow: hidden;
+    background: linear-gradient(120deg, #101D2D, #172F42);
+    color: #FFFFFF;
+}
+
+.fixtures-hero .section-shell {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.fixtures-hero-content {
+    max-width: 650px;
+}
+
+.fixtures-kicker {
+    display: inline-block;
+    margin-bottom: 16px;
+    color: #42C781;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.fixtures-hero h1 {
+    margin: 0 0 18px;
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 800;
+    line-height: 1.15;
+}
+
+.fixtures-hero p {
+    max-width: 550px;
+    margin: 0 0 26px;
+    color: #C8D2DC;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.fixtures-hero-btn {
+    min-height: 46px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 22px;
+    border-radius: 6px;
+    background: #138A50;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.fixtures-hero-btn:hover {
+    background: #08633A;
+    transform: translateY(-2px);
+}
+
+.fixtures-hero-btn:focus-visible {
+    outline: 2px solid #FFFFFF;
+    outline-offset: 4px;
+}
+
+.fixtures-hero-decoration {
+    width: 210px;
+    height: 210px;
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+    font-size: 105px;
+}
+
+
+/* =====================================================
+   FIXTURES SECTION
+===================================================== */
+
+.fixtures-section {
+    background: #F4F6F8;
+}
+
+.fixtures-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.fixtures-heading h2 {
+    margin: 8px 0;
+    color: #101D2D;
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(24px, 3vw, 32px);
+}
+
+.fixtures-heading p {
+    margin: 0;
+    color: #667585;
+    font-size: 13px;
+}
+
+.fixtures-count {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.fixtures-count strong {
+    color: #138A50;
+    font-family: "Montserrat", sans-serif;
+    font-size: 30px;
+}
+
+.fixtures-count span {
+    color: #667585;
+    font-size: 11px;
+}
+
+
+/* =====================================================
+   FIXTURE GRID
+===================================================== */
+
+.fixture-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.fixture-card {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid #DEE5EA;
+    border-radius: 10px;
+    background: #FFFFFF;
+    box-shadow: 0 3px 12px rgba(16,29,45,0.035);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fixture-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(16,29,45,0.08);
+}
+
+.fixture-card-header {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 18px;
+    border-bottom: 1px solid #EEF1F4;
+}
+
+.fixture-number {
+    color: #8291A3;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.fixture-status {
+    padding: 6px 10px;
+    border-radius: 4px;
+    background: #E9F6EF;
+    color: #138A50;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   TEAM INFORMATION
+===================================================== */
+
+.fixture-card-body {
+    min-height: 165px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 48px minmax(0, 1fr);
+    align-items: center;
+    gap: 10px;
+    padding: 24px 18px;
+}
+
+.fixture-team {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    text-align: center;
+}
+
+.fixture-team-badge {
+    width: 58px;
+    height: 58px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #DDECE3;
+    border-radius: 12px;
+    background: #E9F6EF;
+    color: #138A50;
+    font-family: "Montserrat", sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.fixture-team strong {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    color: #101D2D;
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.fixture-team > span {
+    color: #8291A3;
+    font-size: 10px;
+}
+
+.fixture-versus {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.fixture-versus span {
+    color: #138A50;
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.fixture-versus small {
+    color: #8291A3;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   CARD FOOTER
+===================================================== */
+
+.fixture-card-footer {
+    min-height: 43px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 18px;
+    border-top: 1px solid #EEF1F4;
+    background: #FAFBFC;
+}
+
+.fixture-card-footer > span:first-child {
+    color: #8291A3;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.fixture-footer-icon {
+    font-size: 15px;
+}
+
+
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
+.fixtures-empty-state {
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 35px;
+    border: 1px dashed #C9D4DA;
+    border-radius: 10px;
+    background: #FFFFFF;
+    text-align: center;
+}
+
+.fixtures-empty-icon {
+    margin-bottom: 15px;
+    font-size: 42px;
+}
+
+.fixtures-empty-state h3 {
+    margin: 0 0 10px;
+    color: #101D2D;
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+}
+
+.fixtures-empty-state p {
+    max-width: 430px;
+    margin: 0;
+    color: #667585;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 980px) {
+    .fixture-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .fixtures-hero-decoration {
+        width: 170px;
+        height: 170

@@ -1,0 +1,198 @@
+/* =========================================================
+   NEWS LISTING PAGE
+   Boresha Kipaji League
+========================================================= */
+
+.news-hero {
+    padding: 85px 0;
+    background: linear-gradient(120deg, #101D2D, #172F42);
+    color: #fff;
+}
+
+.news-hero .section-kicker,
+.news-heading .section-kicker {
+    color: #42C781;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.news-hero h1 {
+    margin: 15px 0;
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(36px, 5vw, 54px);
+    font-weight: 800;
+}
+
+.news-hero p {
+    max-width: 600px;
+    margin: 0;
+    color: #D5DEE5;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+
+/* NEWS SECTION */
+
+.news-section {
+    padding: 75px 0 90px;
+    background: #F4F6F8;
+}
+
+.news-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 35px;
+}
+
+.news-heading h2 {
+    margin: 10px 0;
+    color: #101D2D;
+    font-family: "Montserrat", sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.news-heading p {
+    margin: 0;
+    color: #667585;
+    font-size: 14px;
+}
+
+.news-count {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 85px;
+    min-height: 75px;
+    padding: 12px;
+    border: 1px solid #DEE5EA;
+    border-radius: 10px;
+    background: #fff;
+}
+
+.news-count strong {
+    color: #138A50;
+    font-size: 26px;
+    font-weight: 800;
+}
+
+.news-count span {
+    color: #667585;
+    font-size: 12px;
+}
+
+
+/* NEWS GRID */
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.news-card {
+    overflow: hidden;
+    border: 1px solid #DEE5EA;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 3px 12px rgba(16, 29, 45, 0.04);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(16, 29, 45, 0.09);
+}
+
+.news-card-banner {
+    display: flex;
+    align-items: center;
+    min-height: 135px;
+    padding: 25px;
+    background: linear-gradient(135deg, #101D2D, #138A50);
+}
+
+.news-card-banner span {
+    padding: 8px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.news-card-content {
+    padding: 25px;
+}
+
+.news-card-label {
+    color: #138A50;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.news-card h3 {
+    margin: 12px 0;
+    color: #101D2D;
+    font-family: "Montserrat", sans-serif;
+    font-size: 19px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.news-card p {
+    margin: 0;
+    color: #667585;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.news-empty {
+    margin-top: 25px;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 980px) {
+    .news-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .news-hero {
+        padding: 65px 0;
+    }
+
+    .news-section {
+        padding: 55px 0 65px;
+    }
+
+    .news-heading {
+        align-items: flex-start;
+    }
+
+    .news-heading h2 {
+        font-size: 26px;
+    }
+
+    .news-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .news-count {
+        min-width: 70px;
+        min-height: 65px;
+    }
+}

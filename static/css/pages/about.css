@@ -1,0 +1,306 @@
+/* =========================================================
+   ABOUT PAGE
+   Boresha Kipaji League
+========================================================= */
+
+
+/* HERO */
+
+.about-hero {
+    padding: 95px 0;
+    background: linear-gradient(120deg, #101D2D, #172F42);
+    color: #fff;
+}
+
+.about-hero .section-kicker,
+.about-section-heading .section-kicker,
+.about-story-heading .section-kicker,
+.about-closing .section-kicker {
+    color: #42C781;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.about-hero h1 {
+    max-width: 800px;
+    margin: 17px 0;
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(36px, 5vw, 58px);
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.about-hero p {
+    max-width: 650px;
+    margin: 0 0 30px;
+    color: #D5DEE5;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.about-hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 13px;
+    padding: 14px 22px;
+    border-radius: 6px;
+    background: #138A50;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.about-hero-btn:hover {
+    background: #08633A;
+    transform: translateY(-2px);
+}
+
+
+/* OUR STORY */
+
+.about-story {
+    padding: 85px 0;
+    background: #fff;
+}
+
+.about-story-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 70px;
+    align-items: start;
+}
+
+.about-story-heading h2 {
+    margin: 15px 0;
+    color: #101D2D;
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(27px, 3vw, 38px);
+    font-weight: 800;
+    line-height: 1.35;
+}
+
+.about-story-content p {
+    margin: 0 0 18px;
+    color: #667585;
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+.about-story-content p:first-child {
+    color: #1C2A38;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+
+/* PURPOSE */
+
+.about-purpose {
+    padding: 85px 0;
+    background: #F4F6F8;
+}
+
+.about-section-heading {
+    max-width: 650px;
+    margin: 0 auto 45px;
+    text-align: center;
+}
+
+.about-section-heading h2 {
+    margin: 13px 0;
+    color: #101D2D;
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(28px, 4vw, 38px);
+    font-weight: 800;
+}
+
+.about-section-heading p {
+    margin: 0;
+    color: #667585;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.purpose-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px;
+}
+
+.purpose-card {
+    padding: 35px;
+    border: 1px solid #DEE5EA;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 3px 12px rgba(16, 29, 45, 0.04);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.purpose-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(16, 29, 45, 0.08);
+}
+
+.purpose-icon {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    margin-bottom: 23px;
+    border-radius: 10px;
+    background: #E9F6EF;
+    color: #138A50;
+    font-size: 25px;
+}
+
+.purpose-label {
+    color: #138A50;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.purpose-card h3 {
+    margin: 12px 0;
+    color: #101D2D;
+    font-family: "Montserrat", sans-serif;
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.purpose-card p {
+    margin: 0;
+    color: #667585;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+
+/* CORE VALUES */
+
+.about-values {
+    padding: 85px 0;
+    background: #fff;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.value-card {
+    padding: 27px 22px;
+    border: 1px solid #DEE5EA;
+    border-radius: 9px;
+    background: #fff;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.value-card:hover {
+    transform: translateY(-4px);
+    border-color: #138A50;
+}
+
+.value-number {
+    color: #138A50;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 900;
+}
+
+.value-card h3 {
+    margin: 18px 0 10px;
+    color: #101D2D;
+    font-family: "Montserrat", sans-serif;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.value-card p {
+    margin: 0;
+    color: #667585;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+
+/* CLOSING */
+
+.about-closing {
+    padding: 80px 0;
+    background: #101D2D;
+    text-align: center;
+}
+
+.about-closing .section-shell {
+    max-width: 800px;
+}
+
+.about-closing h2 {
+    margin: 16px 0;
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(27px, 4vw, 40px);
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.about-closing p {
+    margin: 0;
+    color: #C5D0D9;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 980px) {
+    .values-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .about-story-grid {
+        gap: 35px;
+    }
+}
+
+@media (max-width: 650px) {
+    .about-hero {
+        padding: 65px 0;
+    }
+
+    .about-story,
+    .about-purpose,
+    .about-values {
+        padding: 60px 0;
+    }
+
+    .about-story-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .purpose-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .values-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .purpose-card {
+        padding: 27px;
+    }
+
+    .about-closing {
+        padding: 60px 0;
+    }
+}

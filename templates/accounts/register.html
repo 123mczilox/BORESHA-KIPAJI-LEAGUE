@@ -1,117 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "base/auth_base.html" %}
 
-    <title>Create Account | Boresha Kipaji League</title>
+{% block title %}Create Account | Boresha Kipaji League{% endblock %}
 
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
+{% block auth_content %}
 
-<body class="min-h-screen bg-gray-100">
+<div class="auth-heading">
+    <span class="eyebrow">JOIN THE LEAGUE</span>
 
-    <main class="min-h-screen flex items-center justify-center px-4 py-12">
+    <h2>Create your account</h2>
 
-        <div class="w-full max-w-xl bg-white rounded-2xl shadow-xl p-8">
+    <p>
+        Join Boresha Kipaji League and become part of the football community.
+    </p>
+</div>
 
-            <!-- Branding -->
-            <div class="text-center mb-8">
+<form method="POST" class="auth-form" novalidate>
 
-                <div class="inline-flex items-center justify-center
-                            w-14 h-14 rounded-xl bg-green-900 text-white
-                            font-bold text-xl mb-4">
-                    BK
-                </div>
+    {% csrf_token %}
 
-                <h1 class="text-3xl font-extrabold text-gray-900">
-                    Join Boresha Kipaji
-                </h1>
+    {% if form.non_field_errors %}
+        <div class="alert alert-error">
+            {{ form.non_field_errors }}
+        </div>
+    {% endif %}
 
-                <p class="text-gray-500 mt-2">
-                    Create your account and become part of the journey.
-                </p>
+    {% for field in form %}
 
-            </div>
+        <div class="form-group">
 
-            <!-- Registration Form -->
-            <form method="POST" class="space-y-5">
+            <label for="{{ field.id_for_label }}">
+                {{ field.label }}
+            </label>
 
-                {% csrf_token %}
+            {{ field }}
 
-                {% if form.non_field_errors %}
-                    <div class="bg-red-50 text-red-700 p-3 rounded-lg">
-                        {{ form.non_field_errors }}
-                    </div>
-                {% endif %}
+            {% if field.help_text %}
+                <small class="form-help">{{ field.help_text|safe }}</small>
+            {% endif %}
 
-                {% for field in form %}
-
-                    <div>
-
-                        <label for="{{ field.id_for_label }}"
-                               class="block text-sm font-semibold text-gray-700 mb-2">
-                            {{ field.label }}
-                        </label>
-
-                        {{ field }}
-
-                        {% if field.help_text %}
-                            <p class="text-xs text-gray-500 mt-1">
-                                {{ field.help_text }}
-                            </p>
-                        {% endif %}
-
-                        {% for error in field.errors %}
-                            <p class="text-sm text-red-600 mt-1">
-                                {{ error }}
-                            </p>
-                        {% endfor %}
-
-                    </div>
-
-                {% endfor %}
-
-                <button type="submit"
-                        class="w-full bg-green-900 hover:bg-green-800
-                               text-white font-bold py-3 rounded-lg
-                               transition duration-200">
-                    Create Account
-                </button>
-
-            </form>
-            {% comment %} logout {% endcomment %}
-            {% if user.is_authenticated %}
-    <form method="POST" action="{% url 'logout' %}" class="mt-6">
-        {% csrf_token %}
-
-        <button type="submit"
-                class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-lg">
-            Log Out
-        </button>
-    </form>
-{% endif %}
-            
-
-            <!-- Login Link -->
-            <p class="text-center text-sm text-gray-600 mt-6">
-                Already have an account?
-
-                <a href="{% url 'login' %}"
-                   class="text-green-800 font-bold hover:underline">
-                    Sign in
-                </a>
-            </p>
-
-            <div class="border-t border-gray-100 mt-8 pt-5 text-center">
-                <p class="text-xs text-gray-400">
-                    Boresha Kipaji League — Nurturing Talent, Creating Opportunities.
-                </p>
-            </div>
+            {% for error in field.errors %}
+                <small class="field-error">{{ error }}</small>
+            {% endfor %}
 
         </div>
 
-    </main>
+    {% endfor %}
 
-</body>
-</html>
+    <button type="submit" class="auth-button">
+        Create Account
+        <span>→</span>
+    </button>
+
+</form>
+
+<div class="auth-switch">
+    Already have an account?
+    <a href="{% url 'login' %}">Sign in</a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+
+    <ol class="breadcrumb-list">
+
+        <!-- Home -->
+        <li class="breadcrumb-item">
+
+            <a href="/" class="breadcrumb-home">
+
+                <span class="breadcrumb-home-icon" aria-hidden="true">
+                    ⌂
+                </span>
+
+                <span>Home</span>
+
+            </a>
+
+        </li>
+
+
+        <!-- Separator -->
+        <li class="breadcrumb-separator" aria-hidden="true">
+            ›
+        </li>
+
+
+        <!-- Current Page -->
+        <li class="breadcrumb-item">
+
+            <span class="breadcrumb-current" aria-current="page">
+                {% block breadcrumb %}Dashboard{% endblock %}
+            </span>
+
+        </li>
+
+    </ol>
+
+</nav>

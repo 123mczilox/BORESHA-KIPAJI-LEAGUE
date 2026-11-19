@@ -1,0 +1,3 @@
+{% extends 'base/public_base.html' %}
+{% block title %}{{ team.name|default:'Team' }} | Boresha Kipaji League{% endblock %}
+{% block content %}<section class="section"><div class="section-shell"><span class="section-kicker">Team</span><h1>{{ team.name|default:'Team information unavailable' }}</h1>{% if team.description %}<p>{{ team.description }}</p>{% else %}{% include 'components/empty_state.html' with title='Team profile pending' message='Verified team details have not been supplied.' %}{% endif %}</div></section>{% endblock %}

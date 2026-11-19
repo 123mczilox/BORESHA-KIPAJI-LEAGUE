@@ -1,0 +1,131 @@
+{% extends 'base/public_base.html' %}
+{% load static %}
+
+{% block title %}Football Opportunities | Boresha Kipaji League{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/opportunities.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- OPPORTUNITIES HERO -->
+<section class="opportunities-hero">
+    <div class="section-shell">
+
+        <span class="section-kicker">Discover Your Potential</span>
+
+        <h1>Football Opportunities</h1>
+
+        <p>
+            Explore opportunities that support football development,
+            talent discovery and growth within the Boresha Kipaji League.
+        </p>
+
+        <a href="#available-opportunities" class="opportunities-hero-btn">
+            Explore Opportunities
+            <span aria-hidden="true">&rarr;</span>
+        </a>
+
+    </div>
+</section>
+
+
+<!-- OPPORTUNITIES DIRECTORY -->
+<section class="section opportunities-section" id="available-opportunities">
+
+    <div class="section-shell">
+
+        <div class="opportunities-heading">
+
+            <div>
+                <span class="section-kicker">Explore & Grow</span>
+                <h2>Available Opportunities</h2>
+                <p>
+                    Discover the opportunities currently published
+                    by the league.
+                </p>
+            </div>
+
+            <div class="opportunities-count">
+                <strong>{{ opportunities|length }}</strong>
+                <span>Available</span>
+            </div>
+
+        </div>
+
+
+        {% if opportunities %}
+
+            <div class="opportunities-grid">
+
+                {% for opportunity in opportunities %}
+
+                    <article class="opportunity-card">
+
+                        <div class="opportunity-card-top">
+                            <div class="opportunity-icon" aria-hidden="true">
+                                <span>&#9733;</span>
+                            </div>
+
+                            <span class="opportunity-label">
+                                League Opportunity
+                            </span>
+                        </div>
+
+                        <div class="opportunity-content">
+
+                            <h3>{{ opportunity.title }}</h3>
+
+                            {% if opportunity.description %}
+                                <p>{{ opportunity.description }}</p>
+                            {% else %}
+                                <p>
+                                    Further information about this
+                                    opportunity will be provided soon.
+                                </p>
+                            {% endif %}
+
+                        </div>
+
+                        <div class="opportunity-card-footer">
+                            <span>Explore your potential</span>
+                            <span aria-hidden="true">&rarr;</span>
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="opportunities-empty">
+                {% include 'components/empty_state.html' with title='No opportunities available' message='Published football opportunities have not been supplied.' %}
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<!-- CLOSING SECTION -->
+<section class="opportunities-closing">
+    <div class="section-shell">
+
+        <span class="section-kicker">Boresha Kipaji League</span>
+
+        <h2>Talent Deserves Opportunity</h2>
+
+        <p>
+            We believe in creating an environment where football
+            talent can be discovered, supported and developed.
+        </p>
+
+    </div>
+</section>
+
+{% endblock %}

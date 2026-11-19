@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101D2D">
+    <title>{% block title %}Account | Boresha Kipaji League{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/variables.css' %}">
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+</head>
+<body>
+    <main class="auth-wrapper">
+        <section class="auth-visual">
+            <div class="visual-overlay"></div>
+            <div class="visual-content">
+                <a href="/" class="brand"><span class="brand-icon">⚽</span><span>Boresha Kipaji League</span></a>
+                <div class="visual-message">
+                    <span class="eyebrow">THE BEAUTIFUL GAME</span>
+                    <h1>Discover Talent.<br><span>Build the Future.</span></h1>
+                    <p>A platform connecting football talent, teams, managers and supporters. Be part of the journey.</p>
+                </div>
+                <div class="visual-footer"><span>Football. Talent. Opportunity.</span></div>
+            </div>
+        </section>
+        <section class="auth-form-section">
+            <div class="auth-mobile-brand"><span>⚽</span> Boresha Kipaji League</div>
+            <div class="auth-form-container">{% block auth_content %}{% endblock %}</div>
+            <div class="auth-bottom">&copy; {% now "Y" %} Boresha Kipaji League. All rights reserved.</div>
+        </section>
+    </main>
+</body>
+</html>

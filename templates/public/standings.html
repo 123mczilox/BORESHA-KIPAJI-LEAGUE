@@ -1,0 +1,156 @@
+{% extends 'base/public_base.html' %}
+{% load static %}
+
+{% block title %}League Standings | Boresha Kipaji League{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/standings.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- STANDINGS HERO -->
+<section class="standings-hero">
+    <div class="section-shell">
+        <div class="standings-hero-content">
+            <span class="standings-kicker">BORESHA KIPAJI LEAGUE</span>
+
+            <h1>League Standings</h1>
+
+            <p>
+                Follow the competition as teams battle for position.
+                Stay updated with league performance and the race for the top.
+            </p>
+        </div>
+
+        <div class="standings-hero-decoration" aria-hidden="true">
+            🏆
+        </div>
+    </div>
+</section>
+
+
+<!-- STANDINGS TABLE -->
+<section class="standings-section section">
+    <div class="section-shell">
+
+        <div class="standings-heading">
+            <div>
+                <span class="section-kicker">THE COMPETITION</span>
+                <h2>League Table</h2>
+                <p>Current team rankings and performance.</p>
+            </div>
+
+            {% if standings %}
+            <div class="standings-count">
+                <strong>{{ standings|length }}</strong>
+                <span>Teams</span>
+            </div>
+            {% endif %}
+        </div>
+
+
+        {% if standings %}
+
+        <div class="standings-table-card">
+
+            <div class="standings-table-header">
+                <div>
+                    <h3>Official Standings</h3>
+                    <p>Team performance across the competition</p>
+                </div>
+
+                <span class="standings-live-label">
+                    <span></span> League Table
+                </span>
+            </div>
+
+            <div class="standings-table-wrapper">
+
+                <table class="standings-table">
+                    <caption class="sr-only">Current league standings ordered by the backend standings results</caption>
+
+                    <thead>
+                        <tr>
+                            <th scope="col" class="position-column">#</th>
+                            <th scope="col" class="team-column">Team</th>
+                            <th scope="col">P</th>
+                            <th scope="col">W</th>
+                            <th scope="col">D</th>
+                            <th scope="col">L</th>
+                            <th scope="col">GF</th>
+                            <th scope="col">GA</th>
+                            <th scope="col">GD</th>
+                            <th scope="col" class="points-column">Pts</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for entry in standings %}
+
+                        <tr>
+                            <td class="position-cell">
+                                {{ forloop.counter|stringformat:"02d" }}
+                            </td>
+
+                            <td class="team-cell">
+                                <div class="standings-team">
+                                    <span class="standings-team-badge">
+                                        {{ entry.team.name|first|upper }}
+                                    </span>
+
+                                    <strong>{{ entry.team.name }}</strong>
+                                </div>
+                            </td>
+
+                            <td>{{ entry.played }}</td>
+                            <td>{{ entry.won }}</td>
+                            <td>{{ entry.drawn }}</td>
+                            <td>{{ entry.lost }}</td>
+                            <td>{{ entry.goals_for }}</td>
+                            <td>{{ entry.goals_against }}</td>
+                            <td>{{ entry.goal_difference }}</td>
+
+                            <td class="points-cell">
+                                {{ entry.points }}
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class="standings-table-footer">
+                <p>
+                    P: Played | W: Won | D: Drawn | L: Lost |
+                    GF: Goals For | GA: Goals Against |
+                    GD: Goal Difference | Pts: Points
+                </p>
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <div class="standings-empty-state">
+            <div class="empty-trophy" aria-hidden="true">🏆</div>
+
+            <h3>Standings Not Available Yet</h3>
+
+            <p>
+                The league table will appear here once match results
+                have been recorded and standings are available.
+            </p>
+        </div>
+
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

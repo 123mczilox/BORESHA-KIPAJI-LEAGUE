@@ -1,0 +1,105 @@
+{% extends 'base/public_base.html' %}
+{% load static %}
+
+{% block title %}{{ player|default:'Player' }} | Boresha Kipaji League{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/player_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- PLAYER PROFILE HERO -->
+<section class="player-detail-hero">
+    <div class="section-shell">
+
+        <div class="player-detail-breadcrumb">
+            <a href="{% url 'players' %}">Players</a>
+            <span>/</span>
+            <span>Player Profile</span>
+        </div>
+
+        <div class="player-profile-header">
+
+            <div class="player-profile-avatar" aria-hidden="true">
+                <span>{{ player|stringformat:"s"|first|upper }}</span>
+            </div>
+
+            <div class="player-profile-heading">
+                <span class="section-kicker">League Player</span>
+
+                <h1>
+                    {{ player|default:'Player information unavailable' }}
+                </h1>
+
+                <p>
+                    Boresha Kipaji League player profile
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- PLAYER INFORMATION -->
+<section class="section player-detail-section">
+    <div class="section-shell">
+
+        <div class="player-detail-layout">
+
+            <div class="player-detail-main">
+
+                <div class="player-detail-section-heading">
+                    <span class="section-kicker">Player Information</span>
+                    <h2>About the Player</h2>
+                </div>
+
+                <div class="player-information-card">
+
+                    <div class="player-information-icon">
+                        <span aria-hidden="true">&#9733;</span>
+                    </div>
+
+                    <div>
+                        <h3>Player Profile</h3>
+
+                        <p>
+                            Detailed player information will be displayed
+                            here once verified information is available
+                            from the league system.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <aside class="player-detail-sidebar">
+
+                <div class="player-sidebar-card">
+                    <span class="section-kicker">Profile Status</span>
+
+                    <h3>Information Pending</h3>
+
+                    <p>
+                        Additional player details will appear here
+                        when they are available.
+                    </p>
+                </div>
+
+                <a href="{% url 'players' %}" class="back-to-players">
+                    <span aria-hidden="true">&larr;</span>
+                    Back to All Players
+                </a>
+
+            </aside>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
