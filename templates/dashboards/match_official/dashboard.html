@@ -1,4 +1,310 @@
 {% extends 'base/dashboard_base.html' %}
-{% block title %}Match Official Dashboard{% endblock %}
-{% block breadcrumb %}Match Official{% endblock %}
-{% block content %}<section class="dashboard-page"><article class="dashboard-panel"><h1>Match Official Overview</h1>{% include 'components/empty_state.html' with title='Assignments pending' message='No match assignments have been supplied.' %}</article></section>{% endblock %}
+{% load static %}
+
+{% block title %}Match Official Dashboard | Boresha Kipaji League{% endblock %}
+{% block breadcrumb %}Match Official Dashboard{% endblock %}
+{% block body_class %}match-official-dashboard{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/match_official_dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-page match-official-page">
+
+    <!-- Welcome Header -->
+    <header class="dashboard-welcome">
+        <div>
+            <span class="dashboard-kicker">OFFICIAL CONTROL CENTRE</span>
+            <h1>Welcome, {{ request.user.get_short_name|default:request.user.username }}</h1>
+            <p>Manage your assigned matches and keep match records up to date.</p>
+        </div>
+
+        <div class="dashboard-date">
+            <span>Today</span>
+            <strong>{% now "l, j F Y" %}</strong>
+        </div>
+    </header>
+
+
+    <!-- Statistics -->
+    <section class="official-stats-grid" aria-label="Match official statistics">
+
+        <article class="official-stat-card">
+            <div class="official-stat-icon green">⚽</div>
+            <div>
+                <span>Assigned Matches</span>
+                <strong>{{ assigned_matches_count|default:0 }}</strong>
+                <small>Your allocated fixtures</small>
+            </div>
+        </article>
+
+        <article class="official-stat-card">
+            <div class="official-stat-icon blue">📅</div>
+            <div>
+                <span>Upcoming Matches</span>
+                <strong>{{ upcoming_matches_count|default:0 }}</strong>
+                <small>Fixtures yet to be played</small>
+            </div>
+        </article>
+
+        <article class="official-stat-card">
+            <div class="official-stat-icon gold">✓</div>
+            <div>
+                <span>Completed Matches</span>
+                <strong>{{ completed_matches_count|default:0 }}</strong>
+                <small>Matches officiated</small>
+            </div>
+        </article>
+
+        <article class="official-stat-card">
+            <div class="official-stat-icon red">📋</div>
+            <div>
+                <span>Pending Reports</span>
+                <strong>{{ pending_reports_count|default:0 }}</strong>
+                <small>Reports awaiting submission</small>
+            </div>
+        </article>
+
+    </section>
+
+
+    <!-- Assigned Matches -->
+    <section class="official-panel">
+
+        <div class="official-section-heading">
+            <div>
+                <span class="dashboard-kicker">YOUR FIXTURES</span>
+                <h2>Assigned Matches</h2>
+                <p>Review your upcoming and active match assignments.</p>
+            </div>
+
+            {% if matches_url %}
+                <a href="{{ matches_url }}" class="official-view-link">
+                    View all matches →
+                </a>
+            {% endif %}
+        </div>
+
+        {% if assigned_matches %}
+
+            <div class="official-match-list">
+
+                {% for match in assigned_matches %}
+
+                    <article class="official-match-card">
+
+                        <div class="official-match-date">
+                            <span>{{ match.kickoff_time|date:"d" }}</span>
+                            <small>{{ match.kickoff_time|date:"M Y" }}</small>
+                            <small>{{ match.kickoff_time|date:"H:i" }}</small>
+                        </div>
+
+                        <div class="official-match-details">
+
+                            <span class="official-match-label">ASSIGNED FIXTURE</span>
+
+                            <h3>
+                                {{ match.home_team }}
+                                <span>vs</span>
+                                {{ match.away_team }}
+                            </h3>
+
+                            <p>
+                                <span>📍</span>
+                                {{ match.venue|default:"Venue to be confirmed" }}
+                            </p>
+
+                        </div>
+
+                        <div class="official-match-status">
+
+                            {% if match.status == "completed" %}
+                                <span class="status-badge completed">Completed</span>
+                            {% elif match.status == "live" %}
+                                <span class="status-badge live">In Progress</span>
+                            {% else %}
+                                <span class="status-badge upcoming">Upcoming</span>
+                            {% endif %}
+
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="official-empty-state">
+                <div class="empty-icon">⚽</div>
+                <h3>No assigned matches yet</h3>
+                <p>Your assigned fixtures will appear here once they have been allocated.</p>
+            </div>
+
+        {% endif %}
+
+    </section>
+
+
+    <!-- Recent Activity Grid -->
+    <section class="official-content-grid">
+
+        <!-- Recent Matches -->
+        <article class="official-panel">
+
+            <div class="official-section-heading">
+                <div>
+                    <span class="dashboard-kicker">MATCH HISTORY</span>
+                    <h2>Recently Officiated</h2>
+                </div>
+
+                {% if matches_url %}
+                    <a href="{{ matches_url }}" class="official-view-link">
+                        View all →
+                    </a>
+                {% endif %}
+            </div>
+
+            {% if recent_matches %}
+
+                <div class="official-recent-list">
+
+                    {% for match in recent_matches %}
+
+                        <div class="official-recent-item">
+
+                            <div class="recent-match-icon">⚽</div>
+
+                            <div class="recent-match-info">
+                                <strong>
+                                    {{ match.home_team }} vs {{ match.away_team }}
+                                </strong>
+
+                                <span>
+                                    {{ match.kickoff_time|date:"j M Y" }}
+                                </span>
+                            </div>
+
+                            <span class="status-badge completed">Completed</span>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="official-empty-state compact">
+                    <div class="empty-icon">📋</div>
+                    <h3>No match history</h3>
+                    <p>Your completed matches will appear here.</p>
+                </div>
+
+            {% endif %}
+
+        </article>
+
+
+        <!-- Recent Match Events -->
+        <article class="official-panel">
+
+            <div class="official-section-heading">
+                <div>
+                    <span class="dashboard-kicker">MATCH RECORDS</span>
+                    <h2>Recent Match Events</h2>
+                </div>
+            </div>
+
+            {% if recent_match_events %}
+
+                <div class="official-event-list">
+
+                    {% for event in recent_match_events %}
+
+                        <div class="official-event-item">
+
+                            <div class="event-indicator"></div>
+
+                            <div>
+                                <strong>{{ event.title }}</strong>
+                                <p>{{ event.description }}</p>
+
+                                <small>
+                                    {{ event.created_at|date:"j M Y, H:i" }}
+                                </small>
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="official-empty-state compact">
+                    <div class="empty-icon">📝</div>
+                    <h3>No recent events</h3>
+                    <p>Recorded match events will appear here.</p>
+                </div>
+
+            {% endif %}
+
+        </article>
+
+    </section>
+
+
+    <!-- Quick Actions -->
+    <section class="official-panel official-quick-actions">
+
+        <div class="official-section-heading">
+            <div>
+                <span class="dashboard-kicker">QUICK ACCESS</span>
+                <h2>Match Management</h2>
+                <p>Access the tools you need to perform your duties.</p>
+            </div>
+        </div>
+
+        {% if quick_actions %}
+
+            <div class="official-action-grid">
+
+                {% for action in quick_actions %}
+
+                    <a href="{{ action.url }}" class="official-action-card">
+
+                        <span class="action-icon">
+                            {{ action.icon|default:"→" }}
+                        </span>
+
+                        <span class="action-content">
+                            <strong>{{ action.title }}</strong>
+                            <small>{{ action.description }}</small>
+                        </span>
+
+                        <span class="action-arrow">→</span>
+
+                    </a>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="official-empty-state compact">
+                <p>Match management shortcuts will appear here.</p>
+            </div>
+
+        {% endif %}
+
+    </section>
+
+</section>
+
+{% endblock %}

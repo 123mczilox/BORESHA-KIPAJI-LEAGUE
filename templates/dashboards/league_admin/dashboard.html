@@ -1,4 +1,417 @@
 {% extends 'base/dashboard_base.html' %}
-{% block title %}League Admin Dashboard{% endblock %}
+{% load static %}
+
+{% block title %}League Admin Dashboard | Boresha Kipaji League{% endblock %}
+
 {% block breadcrumb %}League Admin{% endblock %}
-{% block content %}<section class="dashboard-page"><article class="dashboard-panel"><h1>League Administration</h1>{% include 'components/empty_state.html' with title='Dashboard data pending' message='No dashboard statistics have been supplied.' %}</article></section>{% endblock %}
+
+{% block body_class %}league-admin-dashboard{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/league_admin_dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="la-dashboard">
+
+    <!-- WELCOME SECTION -->
+    <header class="la-welcome">
+        <div class="la-welcome-content">
+            <span class="la-eyebrow">LEAGUE MANAGEMENT</span>
+
+            <h1>
+                Welcome back,
+                {{ request.user.get_short_name|default:request.user.username }}
+            </h1>
+
+            <p>
+                Manage league operations, monitor team performance,
+                organize fixtures and keep the competition running smoothly.
+            </p>
+
+            <div class="la-date">
+                📅 {% now "l, j F Y" %}
+            </div>
+        </div>
+
+        <div class="la-welcome-decoration" aria-hidden="true">
+            <span>🏆</span>
+        </div>
+    </header>
+
+
+    <!-- STATISTICS -->
+    <div class="la-section-heading">
+        <div>
+            <span class="la-eyebrow">LEAGUE OVERVIEW</span>
+            <h2>Competition at a glance</h2>
+            <p>Key statistics from your league.</p>
+        </div>
+    </div>
+
+
+    <div class="la-stats-grid">
+
+        <article class="la-stat-card">
+            <div class="la-stat-top">
+                <span>Registered Teams</span>
+                <span class="la-stat-icon la-green">🛡️</span>
+            </div>
+            <strong>{{ total_teams|default:0 }}</strong>
+            <small>Teams participating in the league</small>
+        </article>
+
+        <article class="la-stat-card">
+            <div class="la-stat-top">
+                <span>Registered Players</span>
+                <span class="la-stat-icon la-blue">⚽</span>
+            </div>
+            <strong>{{ total_players|default:0 }}</strong>
+            <small>Players registered in the league</small>
+        </article>
+
+        <article class="la-stat-card">
+            <div class="la-stat-top">
+                <span>Active Seasons</span>
+                <span class="la-stat-icon la-gold">🏆</span>
+            </div>
+            <strong>{{ active_seasons|default:0 }}</strong>
+            <small>Currently active competitions</small>
+        </article>
+
+        <article class="la-stat-card">
+            <div class="la-stat-top">
+                <span>Total Matches</span>
+                <span class="la-stat-icon la-purple">📋</span>
+            </div>
+            <strong>{{ total_matches|default:0 }}</strong>
+            <small>Matches recorded</small>
+        </article>
+
+        <article class="la-stat-card">
+            <div class="la-stat-top">
+                <span>Upcoming Fixtures</span>
+                <span class="la-stat-icon la-orange">📅</span>
+            </div>
+            <strong>{{ upcoming_matches_count|default:0 }}</strong>
+            <small>Matches scheduled ahead</small>
+        </article>
+
+        <article class="la-stat-card">
+            <div class="la-stat-top">
+                <span>Completed Matches</span>
+                <span class="la-stat-icon la-teal">✓</span>
+            </div>
+            <strong>{{ completed_matches_count|default:0 }}</strong>
+            <small>Matches completed</small>
+        </article>
+
+    </div>
+
+
+    <!-- MAIN CONTENT -->
+    <div class="la-main-grid">
+
+        <!-- UPCOMING FIXTURES -->
+        <section class="la-panel">
+
+            <div class="la-panel-header">
+                <div>
+                    <span class="la-eyebrow">MATCH SCHEDULE</span>
+                    <h2>Upcoming Fixtures</h2>
+                </div>
+
+                {% if fixtures_url %}
+                    <a href="{{ fixtures_url }}" class="la-view-link">
+                        View all →
+                    </a>
+                {% endif %}
+            </div>
+
+            {% if upcoming_fixtures %}
+
+                <div class="la-fixtures-list">
+
+                    {% for match in upcoming_fixtures %}
+
+                        <article class="la-fixture">
+
+                            <div class="la-fixture-date">
+                                <strong>{{ match.kickoff_time|date:"d" }}</strong>
+                                <span>{{ match.kickoff_time|date:"M" }}</span>
+                            </div>
+
+                            <div class="la-fixture-info">
+                                <div class="la-fixture-teams">
+                                    <strong>{{ match.home_team }}</strong>
+                                    <span>VS</span>
+                                    <strong>{{ match.away_team }}</strong>
+                                </div>
+
+                                <small>
+                                    {{ match.kickoff_time|date:"D, g:i A" }}
+                                    {% if match.venue %}
+                                        · {{ match.venue }}
+                                    {% endif %}
+                                </small>
+                            </div>
+
+                            <span class="la-status upcoming">Upcoming</span>
+
+                        </article>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="la-empty-state">
+                    <span>📅</span>
+                    <h3>No upcoming fixtures</h3>
+                    <p>Newly scheduled matches will appear here.</p>
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- LEAGUE STANDINGS -->
+        <section class="la-panel">
+
+            <div class="la-panel-header">
+                <div>
+                    <span class="la-eyebrow">COMPETITION RANKINGS</span>
+                    <h2>League Standings</h2>
+                </div>
+
+                {% if standings_url %}
+                    <a href="{{ standings_url }}" class="la-view-link">
+                        Full table →
+                    </a>
+                {% endif %}
+            </div>
+
+            {% if standings_preview %}
+
+                <div class="la-table-wrapper">
+
+                    <table class="la-standings-table">
+
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Team</th>
+                                <th>P</th>
+                                <th>GD</th>
+                                <th>PTS</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            {% for standing in standings_preview %}
+
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+
+                                    <td class="la-team-name">
+                                        {{ standing.team.name }}
+                                    </td>
+
+                                    <td>{{ standing.played }}</td>
+                                    <td>{{ standing.goal_difference }}</td>
+                                    <td class="la-points">{{ standing.points }}</td>
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            {% else %}
+
+                <div class="la-empty-state">
+                    <span>🏆</span>
+                    <h3>Standings unavailable</h3>
+                    <p>League rankings will appear when data is available.</p>
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- RECENT RESULTS -->
+        <section class="la-panel">
+
+            <div class="la-panel-header">
+                <div>
+                    <span class="la-eyebrow">MATCH CENTRE</span>
+                    <h2>Recent Results</h2>
+                </div>
+
+                {% if results_url %}
+                    <a href="{{ results_url }}" class="la-view-link">
+                        View all →
+                    </a>
+                {% endif %}
+            </div>
+
+            {% if recent_results %}
+
+                <div class="la-results-list">
+
+                    {% for match in recent_results %}
+
+                        <article class="la-result">
+
+                            <small>{{ match.kickoff_time|date:"d M Y" }}</small>
+
+                            <div class="la-result-score">
+
+                                <strong>{{ match.home_team }}</strong>
+
+                                <span>
+                                    {{ match.home_score|default:"0" }}
+                                    -
+                                    {{ match.away_score|default:"0" }}
+                                </span>
+
+                                <strong>{{ match.away_team }}</strong>
+
+                            </div>
+
+                        </article>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="la-empty-state">
+                    <span>⚽</span>
+                    <h3>No recent results</h3>
+                    <p>Completed league matches will appear here.</p>
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- RECENT REGISTRATIONS -->
+        <section class="la-panel">
+
+            <div class="la-panel-header">
+                <div>
+                    <span class="la-eyebrow">REGISTRATION CENTRE</span>
+                    <h2>Recent Registrations</h2>
+                </div>
+
+                {% if registrations_url %}
+                    <a href="{{ registrations_url }}" class="la-view-link">
+                        Manage →
+                    </a>
+                {% endif %}
+            </div>
+
+            {% if recent_registrations %}
+
+                <div class="la-registrations-list">
+
+                    {% for registration in recent_registrations %}
+
+                        <article class="la-registration">
+
+                            <div class="la-registration-avatar">
+                                {{ registration.player.first_name|slice:":1"|upper }}
+                            </div>
+
+                            <div class="la-registration-info">
+                                <strong>
+                                    {{ registration.player.first_name }}
+                                    {{ registration.player.last_name }}
+                                </strong>
+
+                                <small>
+                                    {{ registration.team.name }}
+                                </small>
+                            </div>
+
+                            <span class="la-registration-date">
+                                {{ registration.created_at|date:"d M" }}
+                            </span>
+
+                        </article>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="la-empty-state">
+                    <span>👥</span>
+                    <h3>No recent registrations</h3>
+                    <p>New player registrations will appear here.</p>
+                </div>
+
+            {% endif %}
+
+        </section>
+
+    </div>
+
+
+    <!-- QUICK ACTIONS -->
+    <section class="la-quick-actions">
+
+        <div class="la-section-heading">
+            <div>
+                <span class="la-eyebrow">LEAGUE OPERATIONS</span>
+                <h2>Quick Actions</h2>
+                <p>Access your main league management tools.</p>
+            </div>
+        </div>
+
+        <div class="la-actions-grid">
+
+            {% for action in quick_actions %}
+
+                <a href="{{ action.url }}" class="la-action-card">
+
+                    <span class="la-action-icon">
+                        {{ action.icon }}
+                    </span>
+
+                    <span class="la-action-content">
+                        <strong>{{ action.title }}</strong>
+                        <small>{{ action.description }}</small>
+                    </span>
+
+                    <span class="la-action-arrow">→</span>
+
+                </a>
+
+            {% empty %}
+
+                <div class="la-empty-state">
+                    <p>League management shortcuts will appear here.</p>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+</section>
+
+{% endblock %}

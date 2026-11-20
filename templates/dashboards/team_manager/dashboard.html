@@ -1,4 +1,449 @@
 {% extends 'base/dashboard_base.html' %}
-{% block title %}Team Manager Dashboard{% endblock %}
+{% load static %}
+
+{% block title %}Team Manager Dashboard | Boresha Kipaji League{% endblock %}
+
 {% block breadcrumb %}Team Manager{% endblock %}
-{% block content %}<section class="dashboard-page"><article class="dashboard-panel"><h1>Team Management</h1>{% include 'components/empty_state.html' with title='Dashboard data pending' message='No team dashboard statistics have been supplied.' %}</article></section>{% endblock %}
+
+{% block body_class %}team-manager-dashboard{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/team_manager_dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="tm-dashboard">
+
+    <!-- WELCOME -->
+    <header class="tm-welcome">
+
+        <div class="tm-welcome-content">
+            <span class="tm-eyebrow">TEAM MANAGEMENT</span>
+
+            <h1>
+                Welcome back,
+                {{ request.user.get_short_name|default:request.user.username }}
+            </h1>
+
+            <p>
+                Keep your team organized, monitor player performance,
+                manage registrations and stay prepared for upcoming matches.
+            </p>
+
+            <div class="tm-date">
+                📅 {% now "l, j F Y" %}
+            </div>
+        </div>
+
+        <div class="tm-welcome-decoration" aria-hidden="true">
+            ⚽
+        </div>
+
+    </header>
+
+
+    <!-- TEAM IDENTITY -->
+    <section class="tm-team-identity">
+
+        <div class="tm-team-avatar">
+            {% if managed_team %}
+                {{ managed_team.name|slice:":1"|upper }}
+            {% else %}
+                🛡️
+            {% endif %}
+        </div>
+
+        <div class="tm-team-details">
+
+            <span class="tm-eyebrow">YOUR TEAM</span>
+
+            <h2>
+                {% if managed_team %}
+                    {{ managed_team.name }}
+                {% else %}
+                    Team not assigned
+                {% endif %}
+            </h2>
+
+            {% if managed_team %}
+                <p>
+                    {% if managed_team.county %}
+                        {{ managed_team.county }}
+                    {% endif %}
+
+                    {% if managed_team.is_active %}
+                        <span class="tm-team-status">Active Team</span>
+                    {% endif %}
+                </p>
+            {% else %}
+                <p>Your assigned team information will appear here.</p>
+            {% endif %}
+
+        </div>
+
+    </section>
+
+
+    <!-- STATISTICS -->
+    <div class="tm-section-heading">
+        <div>
+            <span class="tm-eyebrow">TEAM OVERVIEW</span>
+            <h2>Team at a glance</h2>
+            <p>Monitor your team's current status.</p>
+        </div>
+    </div>
+
+
+    <div class="tm-stats-grid">
+
+        <article class="tm-stat-card">
+            <div class="tm-stat-top">
+                <span>Total Players</span>
+                <span class="tm-stat-icon tm-blue">👥</span>
+            </div>
+            <strong>{{ total_players|default:0 }}</strong>
+            <small>Players in your squad</small>
+        </article>
+
+        <article class="tm-stat-card">
+            <div class="tm-stat-top">
+                <span>Active Players</span>
+                <span class="tm-stat-icon tm-green">⚽</span>
+            </div>
+            <strong>{{ active_players|default:0 }}</strong>
+            <small>Currently active players</small>
+        </article>
+
+        <article class="tm-stat-card">
+            <div class="tm-stat-top">
+                <span>Upcoming Matches</span>
+                <span class="tm-stat-icon tm-gold">📅</span>
+            </div>
+            <strong>{{ upcoming_matches_count|default:0 }}</strong>
+            <small>Matches scheduled ahead</small>
+        </article>
+
+        <article class="tm-stat-card">
+            <div class="tm-stat-top">
+                <span>Matches Played</span>
+                <span class="tm-stat-icon tm-purple">📋</span>
+            </div>
+            <strong>{{ matches_played|default:0 }}</strong>
+            <small>Completed matches</small>
+        </article>
+
+        <article class="tm-stat-card">
+            <div class="tm-stat-top">
+                <span>Matches Won</span>
+                <span class="tm-stat-icon tm-teal">🏆</span>
+            </div>
+            <strong>{{ matches_won|default:0 }}</strong>
+            <small>Victories recorded</small>
+        </article>
+
+        <article class="tm-stat-card">
+            <div class="tm-stat-top">
+                <span>Pending Registrations</span>
+                <span class="tm-stat-icon tm-orange">📝</span>
+            </div>
+            <strong>{{ pending_registrations|default:0 }}</strong>
+            <small>Awaiting review</small>
+        </article>
+
+    </div>
+
+
+    <!-- MAIN GRID -->
+    <div class="tm-main-grid">
+
+        <!-- UPCOMING MATCHES -->
+        <section class="tm-panel">
+
+            <div class="tm-panel-header">
+                <div>
+                    <span class="tm-eyebrow">MATCH SCHEDULE</span>
+                    <h2>Upcoming Matches</h2>
+                </div>
+
+                {% if matches_url %}
+                    <a href="{{ matches_url }}" class="tm-view-link">
+                        View all →
+                    </a>
+                {% endif %}
+            </div>
+
+            {% if upcoming_matches %}
+
+                <div class="tm-matches-list">
+
+                    {% for match in upcoming_matches %}
+
+                        <article class="tm-match">
+
+                            <div class="tm-match-date">
+                                <strong>{{ match.kickoff_time|date:"d" }}</strong>
+                                <span>{{ match.kickoff_time|date:"M" }}</span>
+                            </div>
+
+                            <div class="tm-match-info">
+
+                                <strong>
+                                    {% if match.home_team == managed_team %}
+                                        {{ match.home_team }} vs {{ match.away_team }}
+                                    {% else %}
+                                        {{ match.away_team }} vs {{ match.home_team }}
+                                    {% endif %}
+                                </strong>
+
+                                <small>
+                                    {{ match.kickoff_time|date:"D, g:i A" }}
+                                    {% if match.venue %}
+                                        · {{ match.venue }}
+                                    {% endif %}
+                                </small>
+
+                            </div>
+
+                            <span class="tm-match-status">Upcoming</span>
+
+                        </article>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="tm-empty-state">
+                    <span>📅</span>
+                    <h3>No upcoming matches</h3>
+                    <p>Your team's scheduled matches will appear here.</p>
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- TEAM PERFORMANCE -->
+        <section class="tm-panel">
+
+            <div class="tm-panel-header">
+                <div>
+                    <span class="tm-eyebrow">TEAM PERFORMANCE</span>
+                    <h2>Season Performance</h2>
+                </div>
+            </div>
+
+            <div class="tm-performance-grid">
+
+                <div class="tm-performance-item">
+                    <strong>{{ matches_played|default:0 }}</strong>
+                    <span>Played</span>
+                </div>
+
+                <div class="tm-performance-item">
+                    <strong>{{ matches_won|default:0 }}</strong>
+                    <span>Won</span>
+                </div>
+
+                <div class="tm-performance-item">
+                    <strong>{{ matches_drawn|default:0 }}</strong>
+                    <span>Drawn</span>
+                </div>
+
+                <div class="tm-performance-item">
+                    <strong>{{ matches_lost|default:0 }}</strong>
+                    <span>Lost</span>
+                </div>
+
+            </div>
+
+            <div class="tm-performance-summary">
+                <div>
+                    <span>Goals Scored</span>
+                    <strong>{{ goals_scored|default:0 }}</strong>
+                </div>
+
+                <div>
+                    <span>Goals Conceded</span>
+                    <strong>{{ goals_conceded|default:0 }}</strong>
+                </div>
+
+                <div>
+                    <span>League Points</span>
+                    <strong>{{ league_points|default:0 }}</strong>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- PLAYER ROSTER -->
+        <section class="tm-panel">
+
+            <div class="tm-panel-header">
+                <div>
+                    <span class="tm-eyebrow">SQUAD MANAGEMENT</span>
+                    <h2>Team Players</h2>
+                </div>
+
+                {% if players_url %}
+                    <a href="{{ players_url }}" class="tm-view-link">
+                        View all →
+                    </a>
+                {% endif %}
+            </div>
+
+            {% if team_players %}
+
+                <div class="tm-players-list">
+
+                    {% for player in team_players %}
+
+                        <article class="tm-player">
+
+                            <div class="tm-player-avatar">
+                                {{ player.first_name|slice:":1"|upper }}
+                            </div>
+
+                            <div class="tm-player-info">
+                                <strong>
+                                    {{ player.first_name }}
+                                    {{ player.last_name }}
+                                </strong>
+
+                                <small>
+                                    {{ player.position|default:"Player" }}
+                                </small>
+                            </div>
+
+                            {% if player.is_active %}
+                                <span class="tm-player-status active">Active</span>
+                            {% else %}
+                                <span class="tm-player-status inactive">Inactive</span>
+                            {% endif %}
+
+                        </article>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="tm-empty-state">
+                    <span>👥</span>
+                    <h3>No players available</h3>
+                    <p>Your registered team players will appear here.</p>
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- RECENT RESULTS -->
+        <section class="tm-panel">
+
+            <div class="tm-panel-header">
+                <div>
+                    <span class="tm-eyebrow">MATCH HISTORY</span>
+                    <h2>Recent Results</h2>
+                </div>
+
+            </div>
+
+            {% if recent_results %}
+
+                <div class="tm-results-list">
+
+                    {% for match in recent_results %}
+
+                        <article class="tm-result">
+
+                            <small>
+                                {{ match.kickoff_time|date:"d M Y" }}
+                            </small>
+
+                            <div class="tm-result-teams">
+
+                                <strong>{{ match.home_team }}</strong>
+
+                                <span>
+                                    {{ match.home_score|default:"0" }}
+                                    -
+                                    {{ match.away_score|default:"0" }}
+                                </span>
+
+                                <strong>{{ match.away_team }}</strong>
+
+                            </div>
+
+                        </article>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="tm-empty-state">
+                    <span>🏟️</span>
+                    <h3>No recent results</h3>
+                    <p>Completed matches will appear here.</p>
+                </div>
+
+            {% endif %}
+
+        </section>
+
+    </div>
+
+
+    <!-- QUICK ACTIONS -->
+    <section class="tm-quick-actions">
+
+        <div class="tm-section-heading">
+            <div>
+                <span class="tm-eyebrow">TEAM MANAGEMENT</span>
+                <h2>Quick Actions</h2>
+                <p>Access your team's management tools.</p>
+            </div>
+        </div>
+
+        <div class="tm-actions-grid">
+
+            {% for action in quick_actions %}
+
+                <a href="{{ action.url }}" class="tm-action-card">
+
+                    <span class="tm-action-icon">
+                        {{ action.icon }}
+                    </span>
+
+                    <span class="tm-action-content">
+                        <strong>{{ action.title }}</strong>
+                        <small>{{ action.description }}</small>
+                    </span>
+
+                    <span class="tm-action-arrow">→</span>
+
+                </a>
+
+            {% empty %}
+
+                <div class="tm-empty-state">
+                    <p>Team management shortcuts will appear here.</p>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+</section>
+
+{% endblock %}

@@ -1,5 +1,379 @@
 {% extends 'base/dashboard_base.html' %}
-{% block title %}Fantasy Dashboard{% endblock %}
-{% block breadcrumb %}Fantasy{% endblock %}
-{% block extra_css %}{% load static %}<link rel="stylesheet" href="{% static 'css/pages/fantasy.css' %}">{% endblock %}
-{% block content %}<section class="fantasy-page"><article class="dashboard-panel"><h1>Fantasy Football</h1>{% include 'components/empty_state.html' with title='Fantasy data pending' message='No fantasy team or gameweek data has been supplied.' %}</article></section>{% endblock %}
+{% load static %}
+
+{% block title %}Fantasy Manager Dashboard | Boresha Kipaji League{% endblock %}
+{% block breadcrumb %}Fantasy Manager Dashboard{% endblock %}
+{% block body_class %}fantasy-manager-dashboard{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/fantasy_manager_dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-page fantasy-page">
+
+    <!-- Welcome Header -->
+    <header class="fantasy-welcome">
+        <div>
+            <span class="dashboard-kicker">FANTASY LEAGUE CONTROL CENTRE</span>
+            <h1>Welcome, {{ request.user.get_short_name|default:request.user.username }}</h1>
+            <p>Monitor fantasy competitions, participants, player selections and rankings.</p>
+        </div>
+
+        <div class="fantasy-date">
+            <span>Today</span>
+            <strong>{% now "l, j F Y" %}</strong>
+        </div>
+    </header>
+
+
+    <!-- Statistics -->
+    <section class="fantasy-stats-grid" aria-label="Fantasy league statistics">
+
+        <article class="fantasy-stat-card">
+            <div class="fantasy-stat-icon green">👥</div>
+            <div>
+                <span>Fantasy Participants</span>
+                <strong>{{ total_participants|default:0 }}</strong>
+                <small>Registered fantasy managers</small>
+            </div>
+        </article>
+
+        <article class="fantasy-stat-card">
+            <div class="fantasy-stat-icon blue">🏆</div>
+            <div>
+                <span>Active Competitions</span>
+                <strong>{{ active_competitions|default:0 }}</strong>
+                <small>Currently running competitions</small>
+            </div>
+        </article>
+
+        <article class="fantasy-stat-card">
+            <div class="fantasy-stat-icon gold">⚽</div>
+            <div>
+                <span>Player Selections</span>
+                <strong>{{ total_player_selections|default:0 }}</strong>
+                <small>Players selected by participants</small>
+            </div>
+        </article>
+
+        <article class="fantasy-stat-card">
+            <div class="fantasy-stat-icon purple">⭐</div>
+            <div>
+                <span>Points Awarded</span>
+                <strong>{{ total_fantasy_points|default:0 }}</strong>
+                <small>Total fantasy points recorded</small>
+            </div>
+        </article>
+
+    </section>
+
+
+    <!-- Competition Overview -->
+    <section class="fantasy-panel">
+
+        <div class="fantasy-section-heading">
+            <div>
+                <span class="dashboard-kicker">COMPETITION MANAGEMENT</span>
+                <h2>Fantasy Competitions</h2>
+                <p>Monitor the competitions currently available to participants.</p>
+            </div>
+
+            {% if competitions_url %}
+                <a href="{{ competitions_url }}" class="fantasy-view-link">
+                    View all competitions →
+                </a>
+            {% endif %}
+        </div>
+
+        {% if competitions %}
+
+            <div class="fantasy-competition-grid">
+
+                {% for competition in competitions %}
+
+                    <article class="fantasy-competition-card">
+
+                        <div class="competition-top">
+                            <span class="competition-icon">🏆</span>
+
+                            {% if competition.status == "active" %}
+                                <span class="fantasy-status active">Active</span>
+                            {% elif competition.status == "completed" %}
+                                <span class="fantasy-status completed">Completed</span>
+                            {% else %}
+                                <span class="fantasy-status upcoming">Upcoming</span>
+                            {% endif %}
+                        </div>
+
+                        <h3>{{ competition.name }}</h3>
+
+                        {% if competition.description %}
+                            <p>{{ competition.description|truncatewords:18 }}</p>
+                        {% else %}
+                            <p>Fantasy competition for Boresha Kipaji League participants.</p>
+                        {% endif %}
+
+                        <div class="competition-footer">
+                            <span>
+                                Participants:
+                                <strong>{{ competition.participant_count|default:0 }}</strong>
+                            </span>
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="fantasy-empty-state">
+                <div class="empty-icon">🏆</div>
+                <h3>No competitions available</h3>
+                <p>Fantasy competitions will appear here once they have been created.</p>
+            </div>
+
+        {% endif %}
+
+    </section>
+
+
+    <!-- Rankings and Recent Selections -->
+    <section class="fantasy-content-grid">
+
+        <!-- Leaderboard -->
+        <article class="fantasy-panel">
+
+            <div class="fantasy-section-heading">
+                <div>
+                    <span class="dashboard-kicker">TOP PERFORMERS</span>
+                    <h2>Fantasy Leaderboard</h2>
+                </div>
+
+                {% if leaderboard_url %}
+                    <a href="{{ leaderboard_url }}" class="fantasy-view-link">
+                        Full rankings →
+                    </a>
+                {% endif %}
+            </div>
+
+            {% if leaderboard %}
+
+                <div class="fantasy-table-wrapper">
+
+                    <table class="fantasy-table">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Participant</th>
+                                <th>Team</th>
+                                <th>Points</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            {% for entry in leaderboard %}
+
+                                <tr>
+                                    <td>
+                                        <span class="rank-number">{{ forloop.counter }}</span>
+                                    </td>
+
+                                    <td>
+                                        <strong>{{ entry.participant_name }}</strong>
+                                    </td>
+
+                                    <td>{{ entry.team_name|default:"—" }}</td>
+
+                                    <td>
+                                        <strong class="fantasy-points">
+                                            {{ entry.points|default:0 }}
+                                        </strong>
+                                    </td>
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            {% else %}
+
+                <div class="fantasy-empty-state compact">
+                    <div class="empty-icon">📊</div>
+                    <h3>No rankings available</h3>
+                    <p>Fantasy rankings will appear once points are recorded.</p>
+                </div>
+
+            {% endif %}
+
+        </article>
+
+
+        <!-- Recent Player Selections -->
+        <article class="fantasy-panel">
+
+            <div class="fantasy-section-heading">
+                <div>
+                    <span class="dashboard-kicker">TEAM SELECTIONS</span>
+                    <h2>Recent Player Selections</h2>
+                </div>
+
+                {% if selections_url %}
+                    <a href="{{ selections_url }}" class="fantasy-view-link">
+                        View all →
+                    </a>
+                {% endif %}
+            </div>
+
+            {% if recent_selections %}
+
+                <div class="fantasy-selection-list">
+
+                    {% for selection in recent_selections %}
+
+                        <div class="fantasy-selection-item">
+
+                            <div class="selection-avatar">
+                                {{ selection.player_name|default:"P"|slice:":1"|upper }}
+                            </div>
+
+                            <div class="selection-info">
+                                <strong>{{ selection.player_name }}</strong>
+                                <span>{{ selection.participant_name }}</span>
+                            </div>
+
+                            <div class="selection-date">
+                                {{ selection.created_at|date:"d M" }}
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="fantasy-empty-state compact">
+                    <div class="empty-icon">⚽</div>
+                    <h3>No recent selections</h3>
+                    <p>New fantasy player selections will appear here.</p>
+                </div>
+
+            {% endif %}
+
+        </article>
+
+    </section>
+
+
+    <!-- Points and Quick Actions -->
+    <section class="fantasy-content-grid">
+
+        <!-- Points Overview -->
+        <article class="fantasy-panel">
+
+            <div class="fantasy-section-heading">
+                <div>
+                    <span class="dashboard-kicker">SCORING SYSTEM</span>
+                    <h2>Points Overview</h2>
+                    <p>Review the latest fantasy points activity.</p>
+                </div>
+            </div>
+
+            {% if recent_points %}
+
+                <div class="fantasy-points-list">
+
+                    {% for item in recent_points %}
+
+                        <div class="fantasy-points-item">
+
+                            <div class="points-player-icon">⭐</div>
+
+                            <div class="points-player-info">
+                                <strong>{{ item.participant_name }}</strong>
+                                <span>{{ item.description }}</span>
+                            </div>
+
+                            <strong class="points-earned">
+                                +{{ item.points }}
+                            </strong>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="fantasy-empty-state compact">
+                    <div class="empty-icon">⭐</div>
+                    <h3>No points activity</h3>
+                    <p>Recent fantasy scoring updates will appear here.</p>
+                </div>
+
+            {% endif %}
+
+        </article>
+
+
+        <!-- Quick Actions -->
+        <article class="fantasy-panel">
+
+            <div class="fantasy-section-heading">
+                <div>
+                    <span class="dashboard-kicker">QUICK ACCESS</span>
+                    <h2>Fantasy Management</h2>
+                    <p>Access important fantasy management tools.</p>
+                </div>
+            </div>
+
+            {% if quick_actions %}
+
+                <div class="fantasy-action-list">
+
+                    {% for action in quick_actions %}
+
+                        <a href="{{ action.url }}" class="fantasy-action-card">
+
+                            <span class="action-icon">
+                                {{ action.icon|default:"→" }}
+                            </span>
+
+                            <span class="action-content">
+                                <strong>{{ action.title }}</strong>
+                                <small>{{ action.description }}</small>
+                            </span>
+
+                            <span class="action-arrow">→</span>
+
+                        </a>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="fantasy-empty-state compact">
+                    <p>Fantasy management shortcuts will appear here.</p>
+                </div>
+
+            {% endif %}
+
+        </article>
+
+    </section>
+
+</section>
+
+{% endblock %}

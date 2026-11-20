@@ -44,7 +44,7 @@ body {
         rgba(8, 20, 34, 0.76) 55%,
         rgba(8, 20, 34, 0.48) 100%
     ),
-    url("../images/hero/auth-stadium.jpg");
+    url("../images/hero/signin.jpg");
 
 background-size: cover;
 background-position: center;

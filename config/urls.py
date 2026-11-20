@@ -25,10 +25,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
+from .dashboard_views import dashboard_entry, role_dashboard
 from .views import home
 
 urlpatterns = [
     path('', home, name='home'),
+    path('dashboard/', dashboard_entry, name='dashboard_entry'),
+    path('dashboard/<slug:role_slug>/', role_dashboard, name='role_dashboard'),
     path('about/', TemplateView.as_view(template_name='public/about.html'), name='about'),
     path('admin/', admin.site.urls),
     path('accounts/', include('apps.accounts.urls')),

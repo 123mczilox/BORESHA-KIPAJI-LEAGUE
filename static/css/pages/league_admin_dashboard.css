@@ -1,0 +1,620 @@
+/* =========================================================
+   LEAGUE ADMIN DASHBOARD
+   Boresha Kipaji League
+========================================================= */
+
+.la-dashboard {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+    color: #172638;
+}
+
+.la-dashboard * {
+    box-sizing: border-box;
+}
+
+
+/* WELCOME */
+
+.la-welcome {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 220px;
+    padding: 38px 42px;
+    margin-bottom: 36px;
+    overflow: hidden;
+    border-radius: 18px;
+    background: linear-gradient(120deg, #101D2D, #174735);
+    color: #fff;
+}
+
+.la-welcome-content {
+    position: relative;
+    z-index: 2;
+    max-width: 650px;
+}
+
+.la-eyebrow {
+    display: block;
+    margin-bottom: 9px;
+    color: #138A50;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.la-welcome .la-eyebrow {
+    color: #42C781;
+}
+
+.la-welcome h1 {
+    margin: 0 0 12px;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(24px, 3vw, 34px);
+    font-weight: 800;
+}
+
+.la-welcome p {
+    max-width: 550px;
+    margin: 0;
+    color: rgba(255,255,255,.75);
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.la-date {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 9px 14px;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 8px;
+    background: rgba(255,255,255,.07);
+    color: #fff;
+    font-size: 11px;
+}
+
+.la-welcome-decoration {
+    position: absolute;
+    top: 50%;
+    right: 75px;
+    transform: translateY(-50%);
+    font-size: 115px;
+    opacity: .15;
+}
+
+
+/* HEADINGS */
+
+.la-section-heading {
+    margin-bottom: 20px;
+}
+
+.la-section-heading h2,
+.la-panel-header h2 {
+    margin: 0;
+    color: #101D2D;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.la-section-heading p {
+    margin: 7px 0 0;
+    color: #87939E;
+    font-size: 12px;
+}
+
+
+/* STATISTICS */
+
+.la-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 17px;
+    margin-bottom: 36px;
+}
+
+.la-stat-card {
+    padding: 22px;
+    border: 1px solid #E9EDF1;
+    border-radius: 13px;
+    background: #fff;
+    box-shadow: 0 3px 15px rgba(16,29,45,.035);
+    transition: .2s ease;
+}
+
+.la-stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(16,29,45,.08);
+}
+
+.la-stat-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 18px;
+    color: #788592;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.la-stat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.la-green { background: #E6F7ED; }
+.la-blue { background: #E9F2FF; }
+.la-gold { background: #FFF4D9; }
+.la-purple { background: #F0EAFE; }
+.la-orange { background: #FFF0E4; }
+.la-teal { background: #E3F7F5; }
+
+.la-stat-card > strong {
+    display: block;
+    margin-bottom: 7px;
+    color: #101D2D;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 29px;
+    font-weight: 800;
+}
+
+.la-stat-card > small {
+    color: #95A0AA;
+    font-size: 10px;
+}
+
+
+/* MAIN GRID */
+
+.la-main-grid {
+    display: grid;
+    grid-template-columns: minmax(0,1.4fr) minmax(280px,1fr);
+    gap: 22px;
+    margin-bottom: 40px;
+}
+
+.la-panel {
+    min-width: 0;
+    padding: 23px;
+    border: 1px solid #E9EDF1;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 3px 15px rgba(16,29,45,.035);
+}
+
+.la-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.la-panel-header .la-eyebrow {
+    margin-bottom: 7px;
+}
+
+.la-view-link {
+    color: #138A50;
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.la-view-link:hover {
+    color: #08633A;
+}
+
+
+/* FIXTURES */
+
+.la-fixture {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 15px 0;
+    border-bottom: 1px solid #EDF0F3;
+}
+
+.la-fixture:last-child {
+    border-bottom: none;
+}
+
+.la-fixture-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 47px;
+    height: 52px;
+    flex-shrink: 0;
+    border-radius: 9px;
+    background: #EAF7EF;
+    color: #138A50;
+}
+
+.la-fixture-date strong {
+    font-size: 18px;
+}
+
+.la-fixture-date span {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.la-fixture-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.la-fixture-teams {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+.la-fixture-teams strong {
+    color: #263747;
+    font-size: 11px;
+}
+
+.la-fixture-teams span {
+    color: #A1AAB2;
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.la-fixture-info small {
+    display: block;
+    margin-top: 7px;
+    color: #89949F;
+    font-size: 10px;
+}
+
+.la-status {
+    padding: 6px 9px;
+    border-radius: 20px;
+    background: #FFF5DD;
+    color: #A97910;
+    font-size: 9px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+
+/* STANDINGS */
+
+.la-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.la-standings-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.la-standings-table th {
+    padding: 12px 8px;
+    border-bottom: 1px solid #E9EDF1;
+    color: #929DA7;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.la-standings-table td {
+    padding: 15px 8px;
+    border-bottom: 1px solid #F0F2F4;
+    color: #526170;
+    font-size: 11px;
+}
+
+.la-standings-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.la-standings-table .la-team-name {
+    color: #263747;
+    font-weight: 700;
+}
+
+.la-standings-table .la-points {
+    color: #138A50;
+    font-weight: 800;
+}
+
+
+/* RESULTS */
+
+.la-result {
+    padding: 15px 0;
+    border-bottom: 1px solid #EDF0F3;
+}
+
+.la-result:last-child {
+    border-bottom: none;
+}
+
+.la-result > small {
+    display: block;
+    margin-bottom: 10px;
+    color: #95A0AA;
+    font-size: 10px;
+}
+
+.la-result-score {
+    display: grid;
+    grid-template-columns: minmax(0,1fr) auto minmax(0,1fr);
+    align-items: center;
+    gap: 10px;
+}
+
+.la-result-score strong {
+    color: #263747;
+    font-size: 11px;
+    overflow-wrap: anywhere;
+}
+
+.la-result-score strong:last-child {
+    text-align: right;
+}
+
+.la-result-score span {
+    padding: 7px 11px;
+    border-radius: 7px;
+    background: #101D2D;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+
+/* REGISTRATIONS */
+
+.la-registration {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 0;
+    border-bottom: 1px solid #EDF0F3;
+}
+
+.la-registration:last-child {
+    border-bottom: none;
+}
+
+.la-registration-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #EAF7EF;
+    color: #138A50;
+    font-weight: 800;
+}
+
+.la-registration-info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+    gap: 5px;
+}
+
+.la-registration-info strong {
+    color: #263747;
+    font-size: 11px;
+}
+
+.la-registration-info small {
+    color: #929DA7;
+    font-size: 10px;
+}
+
+.la-registration-date {
+    color: #89949F;
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+
+/* EMPTY STATES */
+
+.la-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 160px;
+    padding: 20px;
+    text-align: center;
+}
+
+.la-empty-state > span {
+    margin-bottom: 12px;
+    font-size: 27px;
+}
+
+.la-empty-state h3 {
+    margin: 0 0 7px;
+    color: #526170;
+    font-size: 13px;
+}
+
+.la-empty-state p {
+    margin: 0;
+    color: #98A3AD;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+
+/* QUICK ACTIONS */
+
+.la-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 15px;
+}
+
+.la-action-card {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-width: 0;
+    padding: 18px;
+    border: 1px solid #E9EDF1;
+    border-radius: 12px;
+    background: #fff;
+    color: inherit;
+    text-decoration: none;
+    transition: .2s ease;
+}
+
+.la-action-card:hover {
+    transform: translateY(-3px);
+    border-color: #42C781;
+}
+
+.la-action-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #EAF7EF;
+    font-size: 19px;
+}
+
+.la-action-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+    gap: 5px;
+}
+
+.la-action-content strong {
+    color: #263747;
+    font-size: 12px;
+}
+
+.la-action-content small {
+    color: #95A0AA;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.la-action-arrow {
+    color: #138A50;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 1100px) {
+
+    .la-stats-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+
+    .la-main-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .la-actions-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .la-welcome {
+        min-height: auto;
+        padding: 28px 23px;
+    }
+
+    .la-welcome h1 {
+        font-size: 23px;
+    }
+
+    .la-welcome p {
+        font-size: 12px;
+    }
+
+    .la-welcome-decoration {
+        right: 15px;
+        font-size: 65px;
+    }
+
+    .la-stats-grid {
+        gap: 11px;
+    }
+
+    .la-stat-card {
+        padding: 15px;
+    }
+
+    .la-stat-card > strong {
+        font-size: 23px;
+    }
+
+    .la-stat-top {
+        font-size: 10px;
+    }
+
+    .la-panel {
+        padding: 16px;
+    }
+
+    .la-actions-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .la-fixture {
+        flex-wrap: wrap;
+    }
+
+    .la-fixture-info {
+        flex-basis: calc(100% - 65px);
+    }
+
+    .la-fixture .la-status {
+        margin-left: 60px;
+    }
+
+}
+
+
+@media (max-width: 380px) {
+
+    .la-stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+}

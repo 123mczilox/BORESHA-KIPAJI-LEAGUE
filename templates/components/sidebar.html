@@ -23,89 +23,29 @@
 
     <!-- Sidebar Navigation -->
     <nav class="sidebar-nav" aria-label="Primary dashboard navigation">
-
-        <!-- Main Menu -->
         <div class="nav-section">
-
             <span class="nav-section-title">Main Menu</span>
-
-            <a href="/"
-               class="nav-link{% if request.resolver_match.url_name == 'home' %} active{% endif %}"
-               {% if request.resolver_match.url_name == 'home' %}aria-current="page"{% endif %}>
-
-                <span class="nav-icon" aria-hidden="true">⌂</span>
-                <span>Overview</span>
-
-            </a>
-
-
-            <a href="{% url 'matches:match_list_create' %}"
-               class="nav-link{% if request.resolver_match.app_name == 'matches' %} active{% endif %}"
-               {% if request.resolver_match.app_name == 'matches' %}aria-current="page"{% endif %}>
-
-                <span class="nav-icon" aria-hidden="true">◉</span>
-                <span>Matches</span>
-
-            </a>
-
-
-            <a href="{% url 'teams:team_list' %}"
-               class="nav-link{% if request.resolver_match.app_name == 'teams' %} active{% endif %}"
-               {% if request.resolver_match.app_name == 'teams' %}aria-current="page"{% endif %}>
-
-                <span class="nav-icon" aria-hidden="true">◆</span>
-                <span>Teams</span>
-
-            </a>
-
-
-            <a href="{% url 'players:player_list' %}"
-               class="nav-link{% if request.resolver_match.app_name == 'players' %} active{% endif %}"
-               {% if request.resolver_match.app_name == 'players' %}aria-current="page"{% endif %}>
-
-                <span class="nav-icon" aria-hidden="true">♟</span>
-                <span>Players</span>
-
-            </a>
-
-
-            <a href="{% url 'standings:league_table' %}"
-               class="nav-link{% if request.resolver_match.app_name == 'standings' %} active{% endif %}"
-               {% if request.resolver_match.app_name == 'standings' %}aria-current="page"{% endif %}>
-
-                <span class="nav-icon" aria-hidden="true">▥</span>
-                <span>Standings</span>
-
-            </a>
-
+            {% for item in dashboard_navigation %}
+                {% if item.url %}
+                <a href="{{ item.url }}"
+                   class="nav-link{% if item.active %} active{% endif %}"
+                   {% if item.active %}aria-current="page"{% endif %}>
+                    <span class="nav-icon" aria-hidden="true">{{ item.icon }}</span>
+                    <span>{{ item.label }}</span>
+                </a>
+                {% else %}
+                <span class="nav-link nav-link-disabled" aria-disabled="true">
+                    <span class="nav-icon" aria-hidden="true">{{ item.icon }}</span>
+                    <span>{{ item.label }}</span>
+                </span>
+                {% endif %}
+            {% empty %}
+                <span class="nav-link nav-link-disabled" aria-disabled="true">
+                    <span class="nav-icon" aria-hidden="true">⌂</span>
+                    <span>Dashboard navigation unavailable</span>
+                </span>
+            {% endfor %}
         </div>
-
-
-        <!-- League Content -->
-        <div class="nav-section">
-
-            <span class="nav-section-title">League Content</span>
-
-            <span class="nav-link nav-link-disabled"
-                  aria-disabled="true">
-
-                <span class="nav-icon" aria-hidden="true">▣</span>
-                <span>News &amp; Updates</span>
-
-            </span>
-
-
-            <a href="{% url 'statistics:player_statistics' %}"
-               class="nav-link{% if request.resolver_match.app_name == 'statistics' %} active{% endif %}"
-               {% if request.resolver_match.app_name == 'statistics' %}aria-current="page"{% endif %}>
-
-                <span class="nav-icon" aria-hidden="true">▤</span>
-                <span>Statistics</span>
-
-            </a>
-
-        </div>
-
     </nav>
 
 

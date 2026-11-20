@@ -1,0 +1,597 @@
+/* =========================================================
+   MATCH OFFICIAL DASHBOARD
+   Boresha Kipaji League
+========================================================= */
+
+.match-official-page {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    padding-bottom: 35px;
+}
+
+
+/* =========================================================
+   WELCOME HEADER
+========================================================= */
+
+.match-official-page .dashboard-welcome {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.match-official-page .dashboard-kicker {
+    display: block;
+    color: #138A50;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+}
+
+.match-official-page .dashboard-welcome h1 {
+    color: #101D2D;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 800;
+    margin: 0 0 8px;
+}
+
+.match-official-page .dashboard-welcome p {
+    color: #718096;
+    font-size: 14px;
+    margin: 0;
+}
+
+.match-official-page .dashboard-date {
+    background: #FFFFFF;
+    border: 1px solid #E8EDF1;
+    border-radius: 12px;
+    padding: 13px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.match-official-page .dashboard-date span {
+    color: #8491A1;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.match-official-page .dashboard-date strong {
+    color: #101D2D;
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   STATISTICS
+========================================================= */
+
+.official-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 17px;
+}
+
+.official-stat-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #FFFFFF;
+    border: 1px solid #E9EEF2;
+    border-radius: 15px;
+    padding: 21px 18px;
+    min-width: 0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.official-stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 9px 24px rgba(16, 29, 45, 0.07);
+}
+
+.official-stat-icon {
+    width: 47px;
+    height: 47px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 13px;
+    font-size: 20px;
+}
+
+.official-stat-icon.green {
+    color: #138A50;
+    background: #E7F6EE;
+}
+
+.official-stat-icon.blue {
+    color: #3274B9;
+    background: #EAF2FB;
+}
+
+.official-stat-icon.gold {
+    color: #B47A13;
+    background: #FFF5DD;
+}
+
+.official-stat-icon.red {
+    color: #C34D4D;
+    background: #FCECEC;
+}
+
+.official-stat-card span {
+    display: block;
+    color: #788697;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.official-stat-card strong {
+    display: block;
+    color: #101D2D;
+    font-size: 25px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.official-stat-card small {
+    display: block;
+    color: #A0AAB5;
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+
+/* =========================================================
+   PANELS
+========================================================= */
+
+.official-panel {
+    background: #FFFFFF;
+    border: 1px solid #E9EEF2;
+    border-radius: 16px;
+    padding: 23px;
+    min-width: 0;
+}
+
+.official-section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 22px;
+}
+
+.official-section-heading h2 {
+    color: #101D2D;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    margin: 0;
+}
+
+.official-section-heading p {
+    color: #8491A1;
+    font-size: 12px;
+    margin: 6px 0 0;
+}
+
+.official-view-link {
+    color: #138A50;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.official-view-link:hover {
+    color: #08633A;
+}
+
+
+/* =========================================================
+   ASSIGNED MATCHES
+========================================================= */
+
+.official-match-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.official-match-card {
+    display: grid;
+    grid-template-columns: 65px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 17px;
+    padding: 17px;
+    background: #F8FAFB;
+    border: 1px solid #EDF1F4;
+    border-radius: 12px;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.official-match-card:hover {
+    border-color: #B9DFC9;
+    background: #FBFEFC;
+}
+
+.official-match-date {
+    width: 58px;
+    height: 64px;
+    background: #E7F6EE;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.official-match-date span {
+    color: #08633A;
+    font-size: 23px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.official-match-date small {
+    color: #138A50;
+    font-size: 9px;
+    font-weight: 700;
+    margin-top: 4px;
+}
+
+.official-match-details {
+    min-width: 0;
+}
+
+.official-match-label {
+    color: #138A50;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.official-match-details h3 {
+    color: #172638;
+    font-size: 14px;
+    font-weight: 800;
+    margin: 6px 0;
+    overflow-wrap: anywhere;
+}
+
+.official-match-details h3 span {
+    color: #9BA6B2;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 0 5px;
+}
+
+.official-match-details p {
+    color: #8793A1;
+    font-size: 11px;
+    margin: 0;
+}
+
+.official-match-status {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+/* =========================================================
+   STATUS BADGES
+========================================================= */
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.status-badge.completed {
+    color: #087747;
+    background: #E5F6ED;
+}
+
+.status-badge.upcoming {
+    color: #A16A08;
+    background: #FFF4DA;
+}
+
+.status-badge.live {
+    color: #B73535;
+    background: #FCE8E8;
+}
+
+
+/* 
+   TWO-COLUMN CONTENT
+ */
+
+.official-content-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    align-items: start;
+}
+
+
+/* =========================================================
+   RECENT MATCHES
+========================================================= */
+
+.official-recent-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.official-recent-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid #EEF1F4;
+}
+
+.official-recent-item:first-child {
+    padding-top: 0;
+}
+
+.official-recent-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.recent-match-icon {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #E7F6EE;
+    font-size: 17px;
+}
+
+.recent-match-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.recent-match-info strong {
+    display: block;
+    color: #172638;
+    font-size: 12px;
+    margin-bottom: 5px;
+    overflow-wrap: anywhere;
+}
+
+.recent-match-info span {
+    color: #98A3AF;
+    font-size: 10px;
+}
+
+
+/* 
+   MATCH EVENTS
+  */
+
+.official-event-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.official-event-item {
+    display: flex;
+    gap: 13px;
+    padding: 0 0 18px;
+}
+
+.official-event-item:last-child {
+    padding-bottom: 0;
+}
+
+.event-indicator {
+    width: 10px;
+    height: 10px;
+    flex-shrink: 0;
+    margin-top: 4px;
+    border-radius: 50%;
+    background: #138A50;
+    box-shadow: 0 0 0 4px #E7F6EE;
+}
+
+.official-event-item strong {
+    color: #172638;
+    font-size: 12px;
+}
+
+.official-event-item p {
+    color: #8491A1;
+    font-size: 11px;
+    line-height: 1.6;
+    margin: 5px 0;
+}
+
+.official-event-item small {
+    color: #A2ACB7;
+    font-size: 10px;
+}
+
+
+/*  
+   EMPTY STATES
+  */
+
+.official-empty-state {
+    text-align: center;
+    padding: 35px 15px;
+    background: #FAFBFC;
+    border: 1px dashed #DCE4E9;
+    border-radius: 12px;
+}
+
+.official-empty-state.compact {
+    padding: 25px 12px;
+}
+
+.official-empty-state .empty-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.official-empty-state h3 {
+    color: #172638;
+    font-size: 14px;
+    margin: 0 0 7px;
+}
+
+.official-empty-state p {
+    color: #8A96A3;
+    font-size: 11px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+
+/* 
+   QUICK ACTIONS
+ */
+
+.official-action-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+}
+
+.official-action-card {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 17px;
+    background: #F8FAFB;
+    border: 1px solid #EAF0F3;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.official-action-card:hover {
+    background: #F0F9F4;
+    border-color: #B9DFC9;
+    transform: translateY(-2px);
+}
+
+.action-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    color: #138A50;
+    background: #E5F6ED;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.action-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.action-content strong {
+    display: block;
+    color: #172638;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.action-content small {
+    display: block;
+    color: #8995A2;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.action-arrow {
+    color: #138A50;
+    font-size: 18px;
+}
+
+
+/* =========================================================
+   RESPONSIVE DESIGN
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .official-stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+@media (max-width: 760px) {
+
+    .official-content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .official-match-card {
+        grid-template-columns: 55px minmax(0, 1fr);
+    }
+
+    .official-match-date {
+        width: 52px;
+    }
+
+    .official-match-status {
+        grid-column: 2;
+        justify-content: flex-start;
+    }
+
+}
+
+@media (max-width: 520px) {
+
+    .official-stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .official-stat-card {
+        padding: 16px;
+    }
+
+    .official-panel {
+        padding: 17px;
+    }
+
+    .official-section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .official-action-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .official-match-details h3 {
+        font-size: 12px;
+    }
+
+}

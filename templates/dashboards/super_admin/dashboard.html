@@ -1,4 +1,460 @@
 {% extends 'base/dashboard_base.html' %}
-{% block title %}Super Admin Dashboard{% endblock %}
+{% load static %}
+
+{% block title %}Super Admin Dashboard | Boresha Kipaji League{% endblock %}
+
 {% block breadcrumb %}Super Admin{% endblock %}
-{% block content %}<section class="dashboard-page"><article class="dashboard-panel"><h1>Super Admin Overview</h1>{% include 'components/empty_state.html' with title='Dashboard data pending' message='No dashboard statistics have been supplied.' %}</article></section>{% endblock %}
+
+{% block body_class %}super-admin-dashboard{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/super_admin_dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="sa-dashboard">
+
+    <!-- WELCOME HEADER -->
+    <header class="sa-welcome">
+        <div class="sa-welcome-content">
+            <span class="sa-eyebrow">PLATFORM MANAGEMENT</span>
+
+            <h1>
+                Welcome back,
+                {{ request.user.get_short_name|default:request.user.username }}
+            </h1>
+
+            <p>
+                Here's what's happening across Boresha Kipaji League today.
+                Manage your platform and monitor league activities from one place.
+            </p>
+
+            <div class="sa-date">
+                <span aria-hidden="true">📅</span>
+                {% now "l, j F Y" %}
+            </div>
+        </div>
+
+        <div class="sa-welcome-decoration" aria-hidden="true">
+            <span class="sa-decoration-circle"></span>
+            <span class="sa-decoration-ball">⚽</span>
+        </div>
+    </header>
+
+
+    <!-- PAGE HEADING -->
+    <div class="sa-section-heading">
+        <div>
+            <span class="sa-eyebrow">PLATFORM OVERVIEW</span>
+            <h2>League at a glance</h2>
+            <p>Monitor the key numbers across your platform.</p>
+        </div>
+    </div>
+
+
+    <!-- STATISTICS CARDS -->
+    <div class="sa-stats-grid">
+
+        <article class="sa-stat-card">
+            <div class="sa-stat-top">
+                <span class="sa-stat-label">Total Users</span>
+                <span class="sa-stat-icon sa-icon-blue">👥</span>
+            </div>
+
+            <strong class="sa-stat-value">
+                {{ total_users|default:0 }}
+            </strong>
+
+            <span class="sa-stat-description">
+                Registered platform users
+            </span>
+        </article>
+
+
+        <article class="sa-stat-card">
+            <div class="sa-stat-top">
+                <span class="sa-stat-label">Total Teams</span>
+                <span class="sa-stat-icon sa-icon-green">🛡️</span>
+            </div>
+
+            <strong class="sa-stat-value">
+                {{ total_teams|default:0 }}
+            </strong>
+
+            <span class="sa-stat-description">
+                Teams registered on the platform
+            </span>
+        </article>
+
+
+        <article class="sa-stat-card">
+            <div class="sa-stat-top">
+                <span class="sa-stat-label">Registered Players</span>
+                <span class="sa-stat-icon sa-icon-gold">⚽</span>
+            </div>
+
+            <strong class="sa-stat-value">
+                {{ total_players|default:0 }}
+            </strong>
+
+            <span class="sa-stat-description">
+                Players in the league
+            </span>
+        </article>
+
+
+        <article class="sa-stat-card">
+            <div class="sa-stat-top">
+                <span class="sa-stat-label">Active Seasons</span>
+                <span class="sa-stat-icon sa-icon-purple">🏆</span>
+            </div>
+
+            <strong class="sa-stat-value">
+                {{ active_seasons|default:0 }}
+            </strong>
+
+            <span class="sa-stat-description">
+                Currently active seasons
+            </span>
+        </article>
+
+
+        <article class="sa-stat-card">
+            <div class="sa-stat-top">
+                <span class="sa-stat-label">Total Matches</span>
+                <span class="sa-stat-icon sa-icon-orange">📋</span>
+            </div>
+
+            <strong class="sa-stat-value">
+                {{ total_matches|default:0 }}
+            </strong>
+
+            <span class="sa-stat-description">
+                Matches recorded
+            </span>
+        </article>
+
+
+        <article class="sa-stat-card">
+            <div class="sa-stat-top">
+                <span class="sa-stat-label">Upcoming Matches</span>
+                <span class="sa-stat-icon sa-icon-teal">📅</span>
+            </div>
+
+            <strong class="sa-stat-value">
+                {{ upcoming_matches_count|default:0 }}
+            </strong>
+
+            <span class="sa-stat-description">
+                Scheduled matches ahead
+            </span>
+        </article>
+
+    </div>
+
+
+    <!-- MAIN DASHBOARD GRID -->
+    <div class="sa-main-grid">
+
+        <!-- UPCOMING FIXTURES -->
+        <section class="sa-panel sa-fixtures-panel">
+
+            <div class="sa-panel-header">
+                <div>
+                    <span class="sa-eyebrow">MATCH CENTRE</span>
+                    <h2>Upcoming Fixtures</h2>
+                </div>
+
+                {% if fixtures_url %}
+                    <a href="{{ fixtures_url }}" class="sa-view-link">
+                        View all <span aria-hidden="true">→</span>
+                    </a>
+                {% endif %}
+            </div>
+
+            {% if upcoming_fixtures %}
+
+                <div class="sa-fixtures-list">
+
+                    {% for match in upcoming_fixtures %}
+
+                        <article class="sa-fixture">
+
+                            <div class="sa-fixture-date">
+                                <strong>{{ match.kickoff_time|date:"d" }}</strong>
+                                <span>{{ match.kickoff_time|date:"M" }}</span>
+                            </div>
+
+                            <div class="sa-fixture-details">
+
+                                <div class="sa-fixture-teams">
+                                    <strong>
+                                        {{ match.home_team }}
+                                    </strong>
+
+                                    <span>VS</span>
+
+                                    <strong>
+                                        {{ match.away_team }}
+                                    </strong>
+                                </div>
+
+                                <div class="sa-fixture-meta">
+                                    <span>
+                                        {{ match.kickoff_time|date:"g:i A" }}
+                                    </span>
+
+                                    {% if match.venue %}
+                                        <span>• {{ match.venue }}</span>
+                                    {% endif %}
+                                </div>
+
+                            </div>
+
+                            <span class="sa-status upcoming">
+                                Upcoming
+                            </span>
+
+                        </article>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="sa-empty-state">
+                    <span class="sa-empty-icon">📅</span>
+                    <h3>No upcoming fixtures</h3>
+                    <p>Scheduled matches will appear here.</p>
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- USER OVERVIEW -->
+        <section class="sa-panel sa-users-panel">
+
+            <div class="sa-panel-header">
+                <div>
+                    <span class="sa-eyebrow">PLATFORM COMMUNITY</span>
+                    <h2>User Overview</h2>
+                </div>
+
+                {% if users_url %}
+                    <a href="{{ users_url }}" class="sa-view-link">
+                        Manage <span aria-hidden="true">→</span>
+                    </a>
+                {% endif %}
+            </div>
+
+            {% if user_role_counts %}
+
+                <div class="sa-user-roles">
+
+                    {% for role in user_role_counts %}
+
+                        <div class="sa-role-row">
+
+                            <div class="sa-role-info">
+                                <span class="sa-role-dot"></span>
+                                <span>{{ role.label }}</span>
+                            </div>
+
+                            <strong>{{ role.count }}</strong>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="sa-empty-state sa-small-empty">
+                    <span class="sa-empty-icon">👥</span>
+                    <h3>No user breakdown available</h3>
+                    <p>User role statistics will appear here.</p>
+                </div>
+
+            {% endif %}
+
+            <div class="sa-user-total">
+                <span>Total registered users</span>
+                <strong>{{ total_users|default:0 }}</strong>
+            </div>
+
+        </section>
+
+
+        <!-- RECENT RESULTS -->
+        <section class="sa-panel sa-results-panel">
+
+            <div class="sa-panel-header">
+                <div>
+                    <span class="sa-eyebrow">MATCH CENTRE</span>
+                    <h2>Recent Results</h2>
+                </div>
+
+                {% if results_url %}
+                    <a href="{{ results_url }}" class="sa-view-link">
+                        View all <span aria-hidden="true">→</span>
+                    </a>
+                {% endif %}
+            </div>
+
+            {% if recent_results %}
+
+                <div class="sa-results-list">
+
+                    {% for match in recent_results %}
+
+                        <article class="sa-result">
+
+                            <div class="sa-result-date">
+                                {{ match.kickoff_time|date:"d M Y" }}
+                            </div>
+
+                            <div class="sa-result-teams">
+
+                                <div class="sa-result-team">
+                                    <strong>{{ match.home_team }}</strong>
+                                </div>
+
+                                <div class="sa-result-score">
+                                    {{ match.home_score|default:"0" }}
+                                    <span>-</span>
+                                    {{ match.away_score|default:"0" }}
+                                </div>
+
+                                <div class="sa-result-team">
+                                    <strong>{{ match.away_team }}</strong>
+                                </div>
+
+                            </div>
+
+                            <span class="sa-status completed">
+                                Completed
+                            </span>
+
+                        </article>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="sa-empty-state">
+                    <span class="sa-empty-icon">🏟️</span>
+                    <h3>No recent results</h3>
+                    <p>Completed matches will appear here.</p>
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- RECENT ACTIVITY -->
+        <section class="sa-panel sa-activity-panel">
+
+            <div class="sa-panel-header">
+                <div>
+                    <span class="sa-eyebrow">SYSTEM MONITOR</span>
+                    <h2>Recent Activity</h2>
+                </div>
+            </div>
+
+            {% if recent_activities %}
+
+                <div class="sa-activity-list">
+
+                    {% for activity in recent_activities %}
+
+                        <article class="sa-activity-item">
+
+                            <span class="sa-activity-dot"></span>
+
+                            <div class="sa-activity-content">
+                                <strong>{{ activity.title }}</strong>
+
+                                <p>{{ activity.description }}</p>
+
+                                <span>
+                                    {{ activity.created_at|timesince }} ago
+                                </span>
+                            </div>
+
+                        </article>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="sa-empty-state sa-small-empty">
+                    <span class="sa-empty-icon">🔔</span>
+                    <h3>No recent activity</h3>
+                    <p>Platform activity will appear here when available.</p>
+                </div>
+
+            {% endif %}
+
+        </section>
+
+    </div>
+
+
+    <!-- QUICK ACTIONS -->
+    <section class="sa-quick-actions">
+
+        <div class="sa-section-heading">
+            <div>
+                <span class="sa-eyebrow">MANAGEMENT TOOLS</span>
+                <h2>Quick Actions</h2>
+                <p>Quick access to important platform management areas.</p>
+            </div>
+        </div>
+
+
+        <div class="sa-actions-grid">
+
+            {% for action in quick_actions %}
+
+                <a href="{{ action.url }}" class="sa-action-card">
+
+                    <span class="sa-action-icon">
+                        {{ action.icon }}
+                    </span>
+
+                    <span class="sa-action-content">
+                        <strong>{{ action.title }}</strong>
+                        <small>{{ action.description }}</small>
+                    </span>
+
+                    <span class="sa-action-arrow" aria-hidden="true">
+                        →
+                    </span>
+
+                </a>
+
+            {% empty %}
+
+                <div class="sa-empty-state sa-action-empty">
+                    <p>Management shortcuts will appear here.</p>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+</section>
+
+{% endblock %}

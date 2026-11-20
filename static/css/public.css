@@ -32,6 +32,9 @@ a { color: inherit; }
 .nav-link:hover::after, .nav-link.active::after { right: 0; }
 .nav-signin { min-height: 42px; display: inline-grid; place-items: center; padding-inline: 20px; border-radius: 6px; background: var(--green); color: var(--white); text-decoration: none; font-size: 14px; font-weight: 800; }
 .nav-signin:hover { background: var(--green-dark); }
+.nav-auth-actions { display: flex; align-items: center; gap: 8px; }
+.nav-register { min-height: 42px; display: inline-grid; place-items: center; padding-inline: 20px; border: 1px solid var(--green); border-radius: 6px; color: var(--green); text-decoration: none; font-size: 14px; font-weight: 800; }
+.nav-register:hover { background: var(--green); color: var(--white); }
 .nav-toggle { display: none; width: 44px; height: 44px; border: 0; background: transparent; padding: 10px; }
 .nav-toggle span { display: block; height: 2px; margin: 5px 0; background: var(--navy); }
 
@@ -172,7 +175,8 @@ td:last-child, th:last-child { color: var(--gold); }
     .nav-links.open { display: grid; }
     .nav-link { padding: 13px 10px; }
     .nav-link::after { bottom: 7px; }
-    .nav-signin { margin-top: 4px; }
+    .nav-auth-actions { margin-top: 4px; }
+    .nav-auth-actions a { flex: 1; }
     .hero-section { min-height: 560px; }
     .hero-content { padding-block: 72px; }
     .hero-content h1 { font-size: clamp(38px, 12vw, 56px); }
